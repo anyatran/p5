@@ -37,7 +37,7 @@ function draw() {
           break;
         case 'circleSmall':
           fill(cell.innerShapeColor)
-          ellipse(i*cellSize + offset, j*cellSize - offset, cellSize / 2)
+          ellipse(i*cellSize + offset, j*cellSize + offset, cellSize / 2)
           break;
         case 'circleRight':
           fill(cell.innerShapeColor)
