@@ -7,6 +7,7 @@ const shapeType = ['circleFull', 'circleTop', 'circleBottom', 'circleLeft', 'cir
 
 function setup() {
   createCanvas(600, 600)
+  loop()
   // Calculate columns and rows
   columns = floor(width/cellSize)
   rows = floor(height/cellSize)
@@ -21,6 +22,44 @@ function setup() {
 function draw() {
   background(255)
   noStroke()
+  drawGrid()
+}
+
+// reset board when mouse is pressed
+function mousePressed() {
+  init()
+}
+
+// Fill board randomly
+function init() {
+  initGrid()
+}
+
+function initGrid() {
+  for (let i = 0; i < columns; i++) {
+    for (let j = 0; j < rows; j++) {
+      board[i][j] = {}
+      const cell = board[i][j]
+      cell.cellColor = colors[floor(random(colors.length))]
+      setTimeout(() => {
+        cell.innerShape = shapeType[floor(random(shapeType.length))]
+
+        if (cell.innerShape !== 'full') {
+          cell.innerShapeColor = colors[floor(random(colors.length))]
+        }
+
+        if (cell.innerShape === 'circleFull') {
+          cell.circleSize = floor(random(cellSize))
+        }
+      // }, floor(random(300)))
+    }, 25*i + 25*j)
+
+    }
+  }
+  console.log(board)
+}
+
+function drawGrid() {
   for (let i = 0; i < columns; i++) {
     for (let j = 0; j < rows; j++) {
       const cell = board[i][j]
@@ -33,7 +72,14 @@ function draw() {
           break;
         case 'circleFull':
           fill(cell.innerShapeColor)
+          // console.log(cell.circleSize)
+          if (cell.circleSize < cellSize) {
+            cell.circleSize++
+          } else {
+            cell.circleSize--
+          }
           ellipse(i*cellSize + offset, j*cellSize + offset, cell.circleSize)
+
           break;
         case 'circleRight':
           fill(cell.innerShapeColor)
@@ -64,35 +110,4 @@ function draw() {
       }
     }
   }
-
-}
-
-// reset board when mouse is pressed
-function mousePressed() {
-  init()
-}
-
-// Fill board randomly
-function init() {
-  for (let i = 0; i < columns; i++) {
-    for (let j = 0; j < rows; j++) {
-      board[i][j] = {}
-      const cell = board[i][j]
-      cell.cellColor = colors[floor(random(colors.length))]
-      setTimeout(() => {
-
-        cell.innerShape = shapeType[floor(random(shapeType.length))]
-
-        if (cell.innerShape !== 'full') {
-          cell.innerShapeColor = colors[floor(random(colors.length))]
-        }
-
-        if (cell.innerShape === 'circleFull') {
-          cell.circleSize = floor(random(cellSize))
-        }
-      }, floor(random(300)))
-
-    }
-  }
-  console.log(board)
 }
