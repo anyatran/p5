@@ -15,9 +15,8 @@ const sketch = (p) => {
     // Wacky way to make a 2D array is JS
     board = new Array(columns)
     for (let i = 0; i < columns; i++) {
-      board[i] = new Array(rows).fill({})
+      board[i] = new Array(rows)
     }
-    console.log(board)
     init()
   }
 
@@ -29,7 +28,6 @@ const sketch = (p) => {
   // Fill board randomly
   const init = () => {
     currentArt = new Grid(p, cellSize, board)
-    console.log(currentArt)
     currentArt.initGrid()
   }
 

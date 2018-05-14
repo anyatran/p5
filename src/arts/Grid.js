@@ -1,6 +1,4 @@
-const colors = ['#FFFFFF', '#FF4047', '#FFE66E', '#23E8A7', '#2C72F1', '#96D7FE', '#CD4AF4', '#FFDAE2']
-const shapeType = ['circleFull', 'circleTop', 'circleBottom', 'circleLeft', 'circleRight', 'full', 'halfLeft', 'halfRight']
-
+import CONST from '../constants.js'
 export default class Grid {
   constructor(p, size, board) {
     this.p = p
@@ -9,31 +7,31 @@ export default class Grid {
   }
 
   initGrid() {
-    this.board.forEach((column, i) => {
-      return column.forEach((cell, j) => {
-        // console.log(cell)
-        cell.cellColor = colors[this.p.floor(this.p.random(colors.length))]
-        cell.index = [i, j]
+    this.board.map((column, i) => {
+      for (let j = 0; j < column.length; j++) {
+        this.board[i][j] = {}
+        const cell = this.board[i][j]
+        cell.cellColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
         setTimeout(() => {
-          cell.innerShape = shapeType[this.p.floor(this.p.random(shapeType.length))]
+          cell.innerShape = CONST.SHAPE_TYPES[this.p.floor(this.p.random(CONST.SHAPE_TYPES.length))]
 
           if (cell.innerShape !== 'full') {
-            cell.innerShapeColor = colors[this.p.floor(this.p.random(colors.length))]
+            cell.innerShapeColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
           }
 
           if (cell.innerShape === 'circleFull') {
             cell.circleSize = this.p.floor(this.p.random(this.size))
           }
-        // }, this.p.floor(this.p.random(300)))
-        }, 25*i + 25*j)
-      })
+        }, this.p.floor(this.p.random(300)))
+      // }, 25*i + 25*j)
+
+      }
     })
-    // console.log(this.board)
   }
 
   drawGrid() {
-    this.board.forEach((column, i) => {
-      column.forEach((cell, j) => {
+    this.board.map((column, i) => {
+      column.map((cell, j) => {
 
         this.p.fill(cell.cellColor)
         this.p.rect(i*this.size, j*this.size, this.size, this.size)
