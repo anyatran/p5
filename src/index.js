@@ -5,34 +5,42 @@ let columns
 let rows
 let board
 
-function setup() {
-  createCanvas(600, 600)
-  loop()
-  // Calculate columns and rows
-  columns = floor(width/cellSize)
-  rows = floor(height/cellSize)
-  // Wacky way to make a 2D array is JS
-  board = new Array(columns)
-  for (let i = 0; i < columns; i++) {
-    board[i] = new Array(rows).fill({})
+const sketch = (p) => {
+  p.setup = () => {
+    p.createCanvas(600, 600)
+    p.loop()
+    // Calculate columns and rows
+    columns = p.floor(p.width/cellSize)
+    rows = p.floor(p.height/cellSize)
+    // Wacky way to make a 2D array is JS
+    board = new Array(columns)
+    for (let i = 0; i < columns; i++) {
+      board[i] = new Array(rows).fill({})
+    }
+    console.log(board)
+    init()
   }
-  init()
+
+  // reset board when mouse is pressed
+  p.mousePressed = () => {
+    init()
+  }
+
+  // Fill board randomly
+  const init = () => {
+    currentArt = new Grid(p, cellSize, board)
+    console.log(currentArt)
+    currentArt.initGrid()
+  }
+
+  p.draw = () => {
+    p.background(255)
+    p.noStroke()
+    if(currentArt) {
+      currentArt.drawGrid()
+    }
+
+  }
 }
 
-function draw() {
-  background(255)
-  noStroke()
-  currentArt.drawGrid()
-}
-
-// reset board when mouse is pressed
-function mousePressed() {
-  init()
-}
-
-// Fill board randomly
-function init() {
-  currentArt = new Grid(cellSize, board)
-  console.log(currentArt)
-  currentArt.initGrid()
-}
+new p5(sketch)
