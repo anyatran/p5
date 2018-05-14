@@ -1,4 +1,5 @@
 import CONST from '../constants.js'
+
 export default class Grid {
   constructor(p, size, board) {
     this.p = p

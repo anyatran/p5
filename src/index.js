@@ -1,17 +1,15 @@
 import Grid from './arts/Grid.js'
-const cellSize = 50
+import CONST from './constants.js'
 let currentArt
-let columns
-let rows
 let board
 
 const sketch = (p) => {
   p.setup = () => {
-    p.createCanvas(600, 600)
+    p.createCanvas(CONST.CANVAS_WIDTH, CONST.CANVAS_HEIGHT)
     p.loop()
     // Calculate columns and rows
-    columns = p.floor(p.width/cellSize)
-    rows = p.floor(p.height/cellSize)
+    const columns = p.floor(p.width/CONST.CELL_SIZE)
+    const rows = p.floor(p.height/CONST.CELL_SIZE)
     // Wacky way to make a 2D array is JS
     board = new Array(columns)
     for (let i = 0; i < columns; i++) {
@@ -25,9 +23,8 @@ const sketch = (p) => {
     init()
   }
 
-  // Fill board randomly
   const init = () => {
-    currentArt = new Grid(p, cellSize, board)
+    currentArt = new Grid(p, CONST.CELL_SIZE, board)
     currentArt.initGrid()
   }
 
