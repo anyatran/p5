@@ -1,4 +1,5 @@
 export default {
+  BOOLEANS: [true, false, false],
   CANVAS_WIDTH: 600,
   CANVAS_HEIGHT: 600,
   CELL_SIZE: 50,
