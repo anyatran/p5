@@ -1,0 +1,13 @@
+body {
+  background: #000;
+  margin: 100px;
+  padding: 0;
+  position: relative;
+}
+
+.separator {
+  background-color: #000;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
