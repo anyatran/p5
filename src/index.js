@@ -28,20 +28,46 @@ document.addEventListener('DOMContentLoaded', () => {
       init()
     }
 
-    // reset board keys 1, 2, 3, or 4 are pressed
     p.keyPressed = () => {
-      // 1
-      if (p.keyCode === 49) {
-        init()
-      } else if (p.keyCode === 50) {
-        // 2
-        init()
-      } else if (p.keyCode === 51) {
-        // 3
-        init()
-      } else if (p.keyCode === 52) {
-        // 4
-        init()
+      switch (p.keyCode) {
+        case CONST.KEYCODES['1']: // canvas one, top left
+          init()
+          break
+        case CONST.KEYCODES['2']: // canvas one, top right
+          init()
+          break
+        case CONST.KEYCODES['3']: // canvas one, bottom left
+          init()
+          break
+        case CONST.KEYCODES['4']: // canvas one, bottom right
+          init()
+          break
+        case CONST.KEYCODES['5']:
+          init()
+          break
+        case CONST.KEYCODES['6']:
+          init()
+          break
+        case CONST.KEYCODES['7']:
+          init()
+          break
+        case CONST.KEYCODES['8']:
+          init()
+          break
+        case CONST.KEYCODES['9']:
+          init()
+          break
+        case CONST.KEYCODES['0']:
+          init()
+          break
+        case CONST.KEYCODES['hyphen']:
+          init()
+          break
+        case CONST.KEYCODES['equal']:
+          init()
+          break
+        default:
+          break
       }
     }
 
