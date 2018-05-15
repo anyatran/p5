@@ -31,15 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // reset board keys 1, 2, 3, or 4 are pressed
     p.keyPressed = () => {
       // 1
-      if(p.keyCode === 49) {
+      if (p.keyCode === 49) {
         init()
-      } else if(p.keyCode === 50) {
+      } else if (p.keyCode === 50) {
         // 2
         init()
-      } else if(p.keyCode === 51) {
+      } else if (p.keyCode === 51) {
         // 3
         init()
-      } else if(p.keyCode === 52) {
+      } else if (p.keyCode === 52) {
         // 4
         init()
       }
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     p.draw = () => {
       p.background(0)
       p.noStroke()
-      if(currentArt) {
+      if (currentArt) {
         currentArt.drawGrid()
       }
     }
