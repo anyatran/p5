@@ -46,9 +46,9 @@ export default class HalfCircle {
     // const e = new p5.Ease()
     // const q = e.bounceInOut(this.time_, this.p) // play around with diff easings
     //
-    // if(this.animate) {
-    //   if(this.time_ < 1.) {
-    //     if(this.isExpanding_) {
+    // if (this.animate) {
+    //   if (this.time_ < 1.) {
+    //     if (this.isExpanding_) {
     //       this.size = this.p.map(q, 0., 10., this.size, 100)
     //     } else {
     //       this.size = this.p.map(q, 0., 10., this.size, 10)

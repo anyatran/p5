@@ -17,7 +17,7 @@ export default class Grid {
         setTimeout(() => {
           // picking a random shape
           const Shape = CONST.SHAPE_TYPES[this.p.floor(this.p.random(CONST.SHAPE_TYPES.length))]
-          if(Shape) {
+          if (Shape) {
             const innerShapeColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
             cell.shape = new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[this.p.floor(this.p.random(CONST.BOOLEANS.length))])
           }
@@ -32,7 +32,7 @@ export default class Grid {
       column.map((cell, j) => {
         this.p.fill(cell.cellColor)
         this.p.rect(i*this.size, j*this.size, this.size, this.size)
-        if(cell.shape) {
+        if (cell.shape) {
           cell.shape.draw(i, j)
         }
       })
