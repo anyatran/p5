@@ -1,10 +1,15 @@
 import CONST from '../constants.js'
+import Circle from './Circle.js'
+import Easing from '../utils/easing.js'
 
 export default class Grid {
   constructor(p, size, board) {
     this.p = p
     this.size = size
     this.board = board
+    this.isExpanding = true
+    this.time = 0.
+    this.speed = 0.02
   }
 
   initGrid() {
@@ -16,12 +21,14 @@ export default class Grid {
         setTimeout(() => {
           cell.innerShape = CONST.SHAPE_TYPES[this.p.floor(this.p.random(CONST.SHAPE_TYPES.length))]
 
+          // TODO: create a class for each type of shape
           if (cell.innerShape !== 'full') {
             cell.innerShapeColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
           }
 
           if (cell.innerShape === 'circleFull') {
             cell.circleSize = this.p.floor(this.p.random(this.size))
+            cell.shape = new Circle(this.p, cell.circleSize, cell.innerShapeColor)
           }
         }, this.p.floor(this.p.random(300)))
       // }, 25*i + 25*j)
@@ -41,15 +48,7 @@ export default class Grid {
           case 'full':
             break;
           case 'circleFull':
-            this.p.fill(cell.innerShapeColor)
-            // console.log(cell.circleSize)
-            if (cell.circleSize < this.size) {
-              cell.circleSize++
-            } else {
-              cell.circleSize--
-            }
-            this.p.ellipse(i*this.size + offset, j*this.size + offset, cell.circleSize)
-
+            cell.shape.draw(i*this.size + offset, j*this.size + offset)
             break;
           case 'circleRight':
             this.p.fill(cell.innerShapeColor)
