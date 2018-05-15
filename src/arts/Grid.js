@@ -5,27 +5,24 @@ export default class Grid {
     this.p = p
     this.size = size
     this.board = board
-    this.isExpanding = true
-    this.time = 0.
-    this.speed = 0.02
   }
 
   initGrid() {
     this.board.map((column, i) => {
       for (let j = 0; j < column.length; j++) {
+        // initializing a cell
         this.board[i][j] = {}
         const cell = this.board[i][j]
         cell.cellColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
         setTimeout(() => {
           // picking a random shape
           const Shape = CONST.SHAPE_TYPES[this.p.floor(this.p.random(CONST.SHAPE_TYPES.length))]
-          if (Shape) {
+          if(Shape) {
             const innerShapeColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
             cell.shape = new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[this.p.floor(this.p.random(CONST.BOOLEANS.length))])
           }
         }, this.p.floor(this.p.random(300)))
       // }, 25*i + 25*j)
-
       }
     })
   }

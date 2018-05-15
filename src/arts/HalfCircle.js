@@ -1,21 +1,46 @@
 import CONST from '../constants.js'
 
-export default class CircleBottom {
+export default class HalfCircle {
   constructor(p, size, color, animate) {
     this.p = p
     this.size = size
     this.color = color
     this.animate = animate
 
+    this.init()
+  }
+
+  init() {
     this.time_ = 0.
     this.speed_ = 0.02
     this.isExpanding_ = true
+    this.direction_ = CONST.FOUR_DIRECTIONS[this.p.floor(this.p.random(CONST.FOUR_DIRECTIONS.length))]
+    switch (this.direction_) {
+      case 'top':
+        this.arcStart_ = -this.p.PI
+        this.arcEnd_ = this.p.PI
+        break;
+      case 'bottom':
+        this.arcStart_ = 0
+        this.arcEnd_ = this.p.PI
+        break;
+      case 'left':
+        this.arcStart_ = this.p.HALF_PI
+        this.arcEnd_ = -this.p.HALF_PI
+        break;
+      case 'right':
+        this.arcStart_ = -this.p.HALF_PI
+        this.arcEnd_ = this.p.HALF_PI
+        break;
+      default:
+        break;
+    }
   }
 
   draw(x, y) {
     const offset = CONST.CELL_SIZE / 2
     this.p.fill(this.color)
-    this.p.arc(x*this.size + offset, y*this.size + offset, this.size, this.size, 0, this.p.PI)
+    this.p.arc(x*CONST.CELL_SIZE + offset, y*CONST.CELL_SIZE + offset, CONST.CELL_SIZE, CONST.CELL_SIZE, this.arcStart_, this.arcEnd_)
 
     // easing constant
     // const e = new p5.Ease()

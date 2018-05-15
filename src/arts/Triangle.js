@@ -1,18 +1,35 @@
-export default class RightTriangle {
+import CONST from '../constants.js'
+
+export default class Triangle {
   constructor(p, size, color, animate) {
     this.p = p
     this.size = size
     this.color = color
     this.animate = animate
 
+    this.init()
+  }
+
+  init() {
     this.time_ = 0.
     this.speed_ = 0.02
     this.isExpanding_ = true
+    this.direction_ = CONST.TWO_DIRECTIONS[this.p.floor(this.p.random(CONST.TWO_DIRECTIONS.length))]
   }
 
   draw(x, y) {
     this.p.fill(this.color)
-    this.p.triangle(x*this.size, y*this.size + this.size, x*this.size + this.size, y*this.size + this.size, x*this.size + this.size, y*this.size) //triangle(x1,y1,x2,y2,x3,y3)
+    switch (this.direction_) {
+      case 'right':
+        this.p.triangle(x*this.size, y*this.size + this.size, x*this.size + this.size, y*this.size + this.size, x*this.size + this.size, y*this.size) //triangle(x1,y1,x2,y2,x3,y3)
+        break;
+
+      case 'left':
+        this.p.triangle(x*this.size, y*this.size, x*this.size, y*this.size + this.size, x*this.size + this.size, y*this.size + this.size) //triangle(x1,y1,x2,y2,x3,y3)
+        break;
+      default:
+        break;
+    }
 
     // easing constant
     // const e = new p5.Ease()

@@ -3,7 +3,7 @@ import CONST from '../constants.js'
 export default class Circle {
   constructor(p, size, color, animate) {
     this.p = p
-    this.size = this.p.floor(this.p.random(size))
+    this.size = this.p.floor(this.p.random(size)) // pick a random init size
     this.color = color
     this.animate = animate
 
@@ -17,22 +17,25 @@ export default class Circle {
     this.p.fill(this.color)
     this.p.ellipse(x*CONST.CELL_SIZE + offset, y*CONST.CELL_SIZE + offset, this.size)
 
+    if(this.animate) {
+      this.animateShape()
+    }
+  }
+
+  animateShape() {
     // easing constant
     const e = new p5.Ease()
     const q = e.bounceInOut(this.time_, this.p) // play around with diff easings
-
-    if(this.animate) {
-      if(this.time_ < 1.) {
-        if(this.isExpanding_) {
-          this.size = this.p.map(q, 0., 10., this.size, 100)
-        } else {
-          this.size = this.p.map(q, 0., 10., this.size, 10)
-        }
-        this.time_+=this.speed_
+    if(this.time_ < 1.) {
+      if(this.isExpanding_) {
+        this.size = this.p.map(q, 0., 10., this.size, 100)
       } else {
-        this.time_ = 0. // reset time
-        this.isExpanding_ = !this.isExpanding_
+        this.size = this.p.map(q, 0., 10., this.size, 10)
       }
+      this.time_+=this.speed_
+    } else {
+      this.time_ = 0. // reset time
+      this.isExpanding_ = !this.isExpanding_
     }
   }
 }
