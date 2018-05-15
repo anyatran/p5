@@ -15,7 +15,7 @@ export default class CircleBottom {
   draw(x, y) {
     const offset = CONST.CELL_SIZE / 2
     this.p.fill(this.color)
-    this.p.arc(x*CONST.CELL_SIZE + offset, y*CONST.CELL_SIZE + offset, CONST.CELL_SIZE, CONST.CELL_SIZE, this.p.PI, -this.p.PI)
+    this.p.arc(x*this.size + offset, y*this.size + offset, this.size, this.size, 0, this.p.PI)
 
     // easing constant
     // const e = new p5.Ease()

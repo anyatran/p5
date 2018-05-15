@@ -3,7 +3,7 @@ import CONST from '../constants.js'
 export default class Circle {
   constructor(p, size, color, animate) {
     this.p = p
-    this.size = size
+    this.size = this.p.floor(this.p.random(size))
     this.color = color
     this.animate = animate
 
