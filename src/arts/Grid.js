@@ -1,5 +1,11 @@
 import CONST from '../constants.js'
 
+/**
+* Animation ideas:
+* - expand cell size
+* - swap cells
+*/
+
 export default class Grid {
   constructor(p, size, board) {
     this.p = p

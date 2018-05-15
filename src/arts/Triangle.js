@@ -1,5 +1,12 @@
 import CONST from '../constants.js'
 
+/**
+* Animation ideas:
+* - get bigger/smaller in size
+* - rotate
+* - become a square
+*/
+
 export default class Triangle {
   constructor(p, size, color, animate) {
     this.p = p
