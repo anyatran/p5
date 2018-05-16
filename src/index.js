@@ -1,4 +1,4 @@
-import Grid from './arts/Grid.js'
+import Grid from './components/Grid.js'
 import { randomInt } from './helpers.js'
 import CONST from './constants.js'
 

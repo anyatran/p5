@@ -1,3 +1,4 @@
+import Cell from './Cell.js'
 import CONST from '../constants.js'
 import { randomInt } from '../helpers.js'
 
@@ -16,43 +17,40 @@ export default class Grid {
   }
 
   initGrid() {
-    this.board.map((column, i) => {
-      for (let j = 0; j < column.length; j++) {
+    this.board.map((column, x) => {
+      for (let y = 0; y < column.length; y++) {
         // initializing a cell
-        this.board[i][j] = {}
-        const cell = this.board[i][j]
+        let cellColor
         if (this.dark) {
-          cell.cellColor = '#000000'
+          cellColor = '#000000'
         } else {
-          cell.cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
+          cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
         }
+        this.board[x][y] = new Cell(this.p, cellColor, CONST.CELL_SIZE, x, y)
         // picking a random shape
         setTimeout(() => {
           const Shape = CONST.SHAPE_TYPES[randomInt(CONST.SHAPE_TYPES.length)]
           if (Shape) {
             const innerShapeColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
-            cell.shape = new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)], i, j)
+            this.board[x][y].setShape(new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)], x, y))
           }
         }, randomInt(300))
-      // }, 25*i + 25*j)
+      // }, 25*i + 25*y)
       }
     })
   }
 
   drawGrid() {
     // draw the cell first
-    this.board.map((column, i) => {
-      column.map((cell, j) => {
-        this.p.fill(cell.cellColor)
-        this.p.rect(i*this.size, j*this.size, this.size, this.size)
+    this.board.map(column => {
+      column.map(cell => {
+        cell.drawBG()
       })
     })
 
-    this.board.map((column, i) => {
-      column.map((cell, j) => {
-        if (cell.shape) {
-          cell.shape.draw()
-        }
+    this.board.map(column => {
+      column.map(cell => {
+        cell.drawShape()
       })
     })
   }

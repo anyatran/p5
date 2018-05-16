@@ -1,6 +1,6 @@
-import Circle from './arts/Circle.js'
-import HalfCircle from './arts/HalfCircle.js'
-import Triangle from './arts/Triangle.js'
+import Circle from './components/Circle.js'
+import HalfCircle from './components/HalfCircle.js'
+import Triangle from './components/Triangle.js'
 
 export default {
   BOOLEANS: [true, false, false],
