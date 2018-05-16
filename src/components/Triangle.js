@@ -1,4 +1,5 @@
 import CONST from '../constants.js'
+import Shape from './Shape.js'
 import { randomInt } from '../helpers.js'
 
 /**
@@ -9,25 +10,14 @@ import { randomInt } from '../helpers.js'
 * - move to another cell: translate()?
 */
 
-export default class Triangle {
+export default class Triangle extends Shape {
   constructor(p, size, color, animate, x, y) {
-    this.p = p
-    this.size = size
-    this.color = color
-    this.animate = animate
-    this.x = x
-    this.y = y
+    super(p, size, color, animate, x, y)
 
-
-    this.init()
+    this.init_()
   }
 
-  init() {
-    this.time_ = 0.
-    this.dest_ = randomInt(30)
-    this.speed_ = 0.005
-    this.done_ = false
-    this.isExpanding_ = true
+  init_() {
     this.direction_ = CONST.TWO_DIRECTIONS[randomInt(CONST.TWO_DIRECTIONS.length)]
   }
 
@@ -46,28 +36,7 @@ export default class Triangle {
     }
 
     if (this.animate) {
-      this.animateShape()
-    }
-  }
-
-  animateShape() {
-    // easing constant
-    const e = new p5.Ease()
-    const q = e.linear(this.time_, this.p) // play around with diff easings
-
-    if (!this.done_) {
-      this.x = this.p.map(q, 0., 1., this.x, this.dest_)
-      this.time_+=this.speed_
-      if (this.x == this.dest_) {
-        this.done_ = true
-        this.time_ = 0.
-        this.lastFrame = this.p.frameCount
-      }
-    } else {
-      if ((this.lastFrame - this.p.frameCount) % 3 == 0) {
-        this.dest_ = randomInt(30)
-        this.done_ = false
-      }
+      this.moveX()
     }
   }
 }

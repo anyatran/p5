@@ -1,4 +1,5 @@
 import CONST from '../constants.js'
+import Shape from './Shape.js'
 import { randomInt } from '../helpers.js'
 
 /**
@@ -8,22 +9,14 @@ import { randomInt } from '../helpers.js'
 * - become a full/quarter circle
 * - become a square
 */
-export default class HalfCircle {
+export default class HalfCircle extends Shape {
   constructor(p, size, color, animate, x, y) {
-    this.p = p
-    this.size = size
-    this.color = color
-    this.animate = animate
-    this.x = x
-    this.y = y
+    super(p, size, color, animate, x, y)
 
-    this.init()
+    this.init_()
   }
 
-  init() {
-    this.time_ = 0.
-    this.speed_ = 0.02
-    this.isExpanding_ = true
+  init_() {
     this.direction_ = CONST.FOUR_DIRECTIONS[randomInt(CONST.FOUR_DIRECTIONS.length)]
     switch (this.direction_) {
       case 'top':
@@ -48,26 +41,12 @@ export default class HalfCircle {
   }
 
   draw() {
-    const offset = CONST.CELL_SIZE / 2
+    const offset = this.size / 2
     this.p.fill(this.color)
-    this.p.arc(this.x*CONST.CELL_SIZE + offset, this.y*CONST.CELL_SIZE + offset, CONST.CELL_SIZE, CONST.CELL_SIZE, this.arcStart_, this.arcEnd_)
+    this.p.arc(this.x*this.size + offset, this.y*this.size + offset, this.size, this.size, this.arcStart_, this.arcEnd_)
 
-    // easing constant
-    // const e = new p5.Ease()
-    // const q = e.bounceInOut(this.time_, this.p) // play around with diff easings
-    //
-    // if (this.animate) {
-    //   if (this.time_ < 1.) {
-    //     if (this.isExpanding_) {
-    //       this.size = this.p.map(q, 0., 10., this.size, 100)
-    //     } else {
-    //       this.size = this.p.map(q, 0., 10., this.size, 10)
-    //     }
-    //     this.time_+=this.speed_
-    //   } else {
-    //     this.time_ = 0. // reset time
-    //     this.isExpanding_ = !this.isExpanding_
-    //   }
-    // }
+    if (this.animate) {
+      this.moveX()
+    }
   }
 }
