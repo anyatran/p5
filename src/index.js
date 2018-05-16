@@ -1,4 +1,5 @@
-import Grid from './arts/Grid.js'
+import Grid from './components/Grid.js'
+import { countColumns, countRows, randomInt } from './helpers.js'
 import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,10 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const sketch = (p) => {
     p.setup = () => {
       p.createCanvas(body.offsetWidth, body.offsetHeight)
+      p.frameRate(30)
       p.loop()
       // Calculate columns and rows
-      const columns = p.floor(p.width/CONST.CELL_SIZE)
-      const rows = p.floor(p.height/CONST.CELL_SIZE)
+      const columns = countColumns(p.width, CONST.CELL_SIZE)
+      const rows = countRows(p.height, CONST.CELL_SIZE)
       // Wacky way to make a 2D array is JS
       board = new Array(columns)
       for (let i = 0; i < columns; i++) {
@@ -25,46 +27,46 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.width = CONST.FRAME_WIDTH
         separator.style.left = `${offset}px`
       })
-      init()
+      init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
     }
 
     p.keyPressed = () => {
       switch (p.keyCode) {
         case CONST.KEYCODES['1']: // canvas one, top left
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['2']: // canvas one, top right
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['5']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['6']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['7']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['8']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['9']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['0']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['hyphen']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         case CONST.KEYCODES['equal']:
-          init()
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
           break
         default:
           break
@@ -79,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const init = () => {
-      currentArt = new Grid(p, CONST.CELL_SIZE, board)
+    const init = (dark) => {
+      currentArt = new Grid(p, CONST.CELL_SIZE, board, dark)
       currentArt.initGrid()
     }
   }
