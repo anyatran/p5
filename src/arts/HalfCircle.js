@@ -1,4 +1,5 @@
 import CONST from '../constants.js'
+import { randomInt } from '../helpers.js'
 
 /**
 * Animation ideas:
@@ -23,7 +24,7 @@ export default class HalfCircle {
     this.time_ = 0.
     this.speed_ = 0.02
     this.isExpanding_ = true
-    this.direction_ = CONST.FOUR_DIRECTIONS[this.p.floor(this.p.random(CONST.FOUR_DIRECTIONS.length))]
+    this.direction_ = CONST.FOUR_DIRECTIONS[randomInt(CONST.FOUR_DIRECTIONS.length)]
     switch (this.direction_) {
       case 'top':
         this.arcStart_ = -this.p.PI

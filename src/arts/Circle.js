@@ -1,9 +1,10 @@
 import CONST from '../constants.js'
+import { randomInt } from '../helpers.js'
 
 export default class Circle {
   constructor(p, size, color, animate, x, y) {
     this.p = p
-    this.size = this.p.floor(this.p.random(size)) // pick a random init size
+    this.size = randomInt(size) // pick a random init size
     this.color = color
     this.animate = animate
     this.x = x

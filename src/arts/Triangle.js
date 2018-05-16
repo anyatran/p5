@@ -1,4 +1,5 @@
 import CONST from '../constants.js'
+import { randomInt } from '../helpers.js'
 
 /**
 * Animation ideas:
@@ -23,11 +24,11 @@ export default class Triangle {
 
   init() {
     this.time_ = 0.
-    this.dest_ = this.p.floor(this.p.random(30))
+    this.dest_ = randomInt(30)
     this.speed_ = 0.005
     this.done_ = false
     this.isExpanding_ = true
-    this.direction_ = CONST.TWO_DIRECTIONS[this.p.floor(this.p.random(CONST.TWO_DIRECTIONS.length))]
+    this.direction_ = CONST.TWO_DIRECTIONS[randomInt(CONST.TWO_DIRECTIONS.length)]
   }
 
   draw() {
@@ -59,13 +60,13 @@ export default class Triangle {
       this.time_+=this.speed_
       if (this.x == this.dest_) {
         this.done_ = true
+        this.time_ = 0.
         this.lastFrame = this.p.frameCount
       }
     } else {
       if ((this.lastFrame - this.p.frameCount) % 3 == 0) {
-        this.dest_ = this.p.floor(this.p.random(30))
+        this.dest_ = randomInt(30)
         this.done_ = false
-        this.time_ = 0.
       }
     }
   }

@@ -1,4 +1,5 @@
 import CONST from '../constants.js'
+import { randomInt } from '../helpers.js'
 
 /**
 * Animation ideas:
@@ -23,16 +24,16 @@ export default class Grid {
         if (this.dark) {
           cell.cellColor = '#000000'
         } else {
-          cell.cellColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
+          cell.cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
         }
         // picking a random shape
         setTimeout(() => {
-          const Shape = CONST.SHAPE_TYPES[this.p.floor(this.p.random(CONST.SHAPE_TYPES.length))]
+          const Shape = CONST.SHAPE_TYPES[randomInt(CONST.SHAPE_TYPES.length)]
           if (Shape) {
-            const innerShapeColor = CONST.COLORS[this.p.floor(this.p.random(CONST.COLORS.length))]
-            cell.shape = new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[this.p.floor(this.p.random(CONST.BOOLEANS.length))], i, j)
+            const innerShapeColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
+            cell.shape = new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)], i, j)
           }
-        }, this.p.floor(this.p.random(300)))
+        }, randomInt(300))
       // }, 25*i + 25*j)
       }
     })

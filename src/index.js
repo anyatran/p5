@@ -1,4 +1,5 @@
 import Grid from './arts/Grid.js'
+import { randomInt } from './helpers.js'
 import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,23 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.width = CONST.FRAME_WIDTH
         separator.style.left = `${offset}px`
       })
-      init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
+      init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
     }
 
     // reset board keys 1, 2, 3, or 4 are pressed
     p.keyPressed = () => {
       // 1
       if (p.keyCode === 49) {
-        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
+        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
       } else if (p.keyCode === 50) {
         // 2
-        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
+        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
       } else if (p.keyCode === 51) {
         // 3
-        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
+        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
       } else if (p.keyCode === 52) {
         // 4
-        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
+        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
       }
     }
 
