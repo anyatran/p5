@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sketch = (p) => {
     p.setup = () => {
       p.createCanvas(body.offsetWidth, body.offsetHeight)
+      p.frameRate(30)
       p.loop()
       // Calculate columns and rows
       const columns = p.floor(p.width/CONST.CELL_SIZE)
@@ -25,23 +26,23 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.width = CONST.FRAME_WIDTH
         separator.style.left = `${offset}px`
       })
-      init()
+      init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
     }
 
     // reset board keys 1, 2, 3, or 4 are pressed
     p.keyPressed = () => {
       // 1
       if (p.keyCode === 49) {
-        init()
+        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
       } else if (p.keyCode === 50) {
         // 2
-        init()
+        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
       } else if (p.keyCode === 51) {
         // 3
-        init()
+        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
       } else if (p.keyCode === 52) {
         // 4
-        init()
+        init(CONST.BOOLEANS[p.floor(p.random(CONST.BOOLEANS.length))])
       }
     }
 
@@ -53,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const init = () => {
-      currentArt = new Grid(p, CONST.CELL_SIZE, board)
+    const init = (dark) => {
+      currentArt = new Grid(p, CONST.CELL_SIZE, board, dark)
       currentArt.initGrid()
     }
   }

@@ -1,21 +1,23 @@
 import CONST from '../constants.js'
 
 export default class Circle {
-  constructor(p, size, color, animate) {
+  constructor(p, size, color, animate, x, y) {
     this.p = p
     this.size = this.p.floor(this.p.random(size)) // pick a random init size
     this.color = color
     this.animate = animate
+    this.x = x
+    this.y = y
 
     this.time_ = 0.
     this.speed_ = 0.02
     this.isExpanding_ = true
   }
 
-  draw(x, y) {
+  draw() {
     const offset = CONST.CELL_SIZE / 2
     this.p.fill(this.color)
-    this.p.ellipse(x*CONST.CELL_SIZE + offset, y*CONST.CELL_SIZE + offset, this.size)
+    this.p.ellipse(this.x*CONST.CELL_SIZE + offset, this.y*CONST.CELL_SIZE + offset, this.size)
 
     if (this.animate) {
       this.animateShape()

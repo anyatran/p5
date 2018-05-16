@@ -8,11 +8,13 @@ import CONST from '../constants.js'
 * - become a square
 */
 export default class HalfCircle {
-  constructor(p, size, color, animate) {
+  constructor(p, size, color, animate, x, y) {
     this.p = p
     this.size = size
     this.color = color
     this.animate = animate
+    this.x = x
+    this.y = y
 
     this.init()
   }
@@ -44,10 +46,10 @@ export default class HalfCircle {
     }
   }
 
-  draw(x, y) {
+  draw() {
     const offset = CONST.CELL_SIZE / 2
     this.p.fill(this.color)
-    this.p.arc(x*CONST.CELL_SIZE + offset, y*CONST.CELL_SIZE + offset, CONST.CELL_SIZE, CONST.CELL_SIZE, this.arcStart_, this.arcEnd_)
+    this.p.arc(this.x*CONST.CELL_SIZE + offset, this.y*CONST.CELL_SIZE + offset, CONST.CELL_SIZE, CONST.CELL_SIZE, this.arcStart_, this.arcEnd_)
 
     // easing constant
     // const e = new p5.Ease()
