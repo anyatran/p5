@@ -1,5 +1,5 @@
 import Grid from './components/Grid.js'
-import { randomInt } from './helpers.js'
+import { countColumns, countRows, randomInt } from './helpers.js'
 import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
       p.frameRate(30)
       p.loop()
       // Calculate columns and rows
-      const columns = p.floor(p.width/CONST.CELL_SIZE)
-      const rows = p.floor(p.height/CONST.CELL_SIZE)
+      const columns = countColumns(p.width, CONST.CELL_SIZE)
+      const rows = countRows(p.height, CONST.CELL_SIZE)
       // Wacky way to make a 2D array is JS
       board = new Array(columns)
       for (let i = 0; i < columns; i++) {

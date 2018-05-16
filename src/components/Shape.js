@@ -1,5 +1,5 @@
 import CONST from '../constants.js'
-import { randomInt } from '../helpers.js'
+import { countColumns, countRows, randomInt } from '../helpers.js'
 
 export default class Shape {
   constructor(p, size, color, animate, x, y) {
@@ -13,10 +13,12 @@ export default class Shape {
     this.easing_ = new p5.Ease()
     this.moveTimer_ = 0.
     this.sizeTimer_ = 0.
-    this.dest_ = randomInt(30)
+    this.dest_ = randomInt(1 + countColumns(p.width, CONST.CELL_SIZE))
     this.speed_ = 0.005
     this.reachedDest_ = false
     this.isExpanding_ = true
+    this.maxSize_ = CONST.CELL_SIZE * 2
+    this.minSize_ = CONST.CELL_SIZE * 0.1
   }
 
   moveX() {
@@ -33,20 +35,19 @@ export default class Shape {
       }
     } else {
       if ((this.lastFrame - this.p.frameCount) % 3 == 0) {
-        this.dest_ = randomInt(30)
+        this.dest_ = randomInt(1 + countColumns(this.p.width, CONST.CELL_SIZE))
         this.reachedDest_ = false
       }
     }
   }
 
   changeSize() {
-    // easing constant
-    const q = this.easing_.bounceInOut(this.sizeTimer_, this.p) // play around with diff easings
+    const q = this.easing_.quinticInOut(this.sizeTimer_, this.p) // play around with diff easings
     if (this.sizeTimer_ < 1.) {
       if (this.isExpanding_) {
-        this.size = this.p.map(q, 0., 10., this.size, 100)
+        this.size = this.p.map(q, 0., 10., this.size, this.maxSize_)
       } else {
-        this.size = this.p.map(q, 0., 10., this.size, 10)
+        this.size = this.p.map(q, 0., 10., this.size, this.minSize_)
       }
       this.sizeTimer_+=this.speed_
     } else {
