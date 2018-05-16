@@ -30,20 +30,46 @@ document.addEventListener('DOMContentLoaded', () => {
       init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
     }
 
-    // reset board keys 1, 2, 3, or 4 are pressed
     p.keyPressed = () => {
-      // 1
-      if (p.keyCode === 49) {
-        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
-      } else if (p.keyCode === 50) {
-        // 2
-        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
-      } else if (p.keyCode === 51) {
-        // 3
-        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
-      } else if (p.keyCode === 52) {
-        // 4
-        init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+      switch (p.keyCode) {
+        case CONST.KEYCODES['1']: // canvas one, top left
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['2']: // canvas one, top right
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['3']: // canvas one, bottom left
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['4']: // canvas one, bottom right
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['5']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['6']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['7']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['8']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['9']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['0']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['hyphen']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        case CONST.KEYCODES['equal']:
+          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          break
+        default:
+          break
       }
     }
 
