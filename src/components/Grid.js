@@ -9,11 +9,11 @@ import { randomInt } from '../helpers.js'
 */
 
 export default class Grid {
-  constructor(p, size, board, dark) {
+  constructor(p, size, board, darkMode) {
     this.p = p
     this.size = size
     this.board = board
-    this.dark = dark
+    this.darkMode = darkMode
   }
 
   initGrid() {
@@ -21,7 +21,7 @@ export default class Grid {
       for (let y = 0; y < column.length; y++) {
         // initializing a cell
         let cellColor
-        if (this.dark) {
+        if (this.darkMode) {
           cellColor = '#000000'
         } else {
           cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
