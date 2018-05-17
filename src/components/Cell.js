@@ -12,8 +12,12 @@ export default class Cell {
     this.shape = shape
   }
 
-  drawBG() {
-    this.p.fill(this.color)
+  drawBG(darkMode) {
+    if (darkMode) {
+      this.p.fill('#000000')
+    } else {
+      this.p.fill(this.color)
+    }
     this.p.rect(this.x*this.size, this.y*this.size, this.size, this.size)
     // this.p.translate(this.m, 0)
     // this.m+=0.01

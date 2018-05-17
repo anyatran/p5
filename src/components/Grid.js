@@ -20,12 +20,8 @@ export default class Grid {
     this.board.map((column, x) => {
       for (let y = 0; y < column.length; y++) {
         // initializing a cell
-        let cellColor
-        if (this.darkMode) {
-          cellColor = '#000000'
-        } else {
-          cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
-        }
+        const cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
+        // }
         this.board[x][y] = new Cell(this.p, cellColor, CONST.CELL_SIZE, x, y)
         // picking a random shape
         setTimeout(() => {
@@ -44,7 +40,7 @@ export default class Grid {
     // draw the cell first
     this.board.map(column => {
       column.map(cell => {
-        cell.drawBG()
+        cell.drawBG(this.darkMode)
       })
     })
 
@@ -53,5 +49,9 @@ export default class Grid {
         cell.drawShape()
       })
     })
+  }
+
+  toggleDarkMode(isDarkMode) {
+    this.darkMode = isDarkMode
   }
 }
