@@ -5,6 +5,7 @@ export default class Cell {
     this.size = size
     this.x = x
     this.y = y
+    // this.m = 1
   }
 
   setShape(shape) {
@@ -14,6 +15,8 @@ export default class Cell {
   drawBG() {
     this.p.fill(this.color)
     this.p.rect(this.x*this.size, this.y*this.size, this.size, this.size)
+    // this.p.translate(this.m, 0)
+    // this.m+=0.01
   }
 
   drawShape() {
