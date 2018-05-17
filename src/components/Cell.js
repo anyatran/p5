@@ -1,10 +1,11 @@
 export default class Cell {
-  constructor(p, color, size, x, y) {
+  constructor(p, color, size, x, y, darkMode) {
     this.p = p
     this.color = color
     this.size = size
     this.x = x
     this.y = y
+    this.darkMode = darkMode
     // this.m = 1
   }
 
@@ -12,8 +13,12 @@ export default class Cell {
     this.shape = shape
   }
 
-  drawBG(darkMode) {
-    if (darkMode) {
+  setDarkMode(darkMode) {
+    this.darkMode = darkMode
+  }
+
+  drawBG() {
+    if (this.darkMode) {
       this.p.fill('#000000')
     } else {
       this.p.fill(this.color)
