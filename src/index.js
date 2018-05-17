@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.width = CONST.FRAME_WIDTH
         separator.style.left = `${offset}px`
       })
-      init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+      init()
     }
 
     p.keyPressed = () => {
@@ -38,37 +38,37 @@ document.addEventListener('DOMContentLoaded', () => {
           toggleDarkMode(!darkMode)
           break
         case CONST.KEYCODES['2']: // canvas one, top right
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['5']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['6']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['7']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['8']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['9']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['0']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['hyphen']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['equal']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         default:
           break
@@ -83,8 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const init = (dark) => {
-      currentArt = new Grid(p, CONST.CELL_SIZE, board, dark)
+    const init = () => {
+      darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
+      currentArt = new Grid(p, CONST.CELL_SIZE, board, darkMode)
       currentArt.initGrid()
     }
 
