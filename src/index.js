@@ -3,9 +3,9 @@ import { countColumns, countRows, randomInt } from './helpers.js'
 import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-  let currentArt
+  let grid
   let board
-  let darkMode = false
+  let darkMode
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       switch (p.keyCode) {
         // toggle dark mode
         case CONST.KEYCODES['1']: // canvas one, top left
-          toggleDarkMode(!darkMode)
+          changeDarkMode(!darkMode)
           break
         case CONST.KEYCODES['2']: // canvas one, top right
           init()
@@ -78,20 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
     p.draw = () => {
       p.background(0)
       p.noStroke()
-      if (currentArt) {
-        currentArt.drawGrid()
+      if (grid) {
+        grid.drawGrid()
       }
     }
 
     const init = () => {
       darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      currentArt = new Grid(p, CONST.CELL_SIZE, board, darkMode)
-      currentArt.initGrid()
+      grid = new Grid(p, CONST.CELL_SIZE, board, darkMode)
+      grid.initGrid()
     }
 
-    const toggleDarkMode = (isDarkMode) => {
+    const changeDarkMode = (isDarkMode) => {
       darkMode = isDarkMode
-      currentArt.toggleDarkMode(isDarkMode)
+      grid.changeDarkMode(isDarkMode)
     }
   }
 

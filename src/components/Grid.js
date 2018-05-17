@@ -51,7 +51,7 @@ export default class Grid {
     })
   }
 
-  toggleDarkMode(isDarkMode) {
+  changeDarkMode(isDarkMode) {
     this.darkMode = isDarkMode
   }
 }
