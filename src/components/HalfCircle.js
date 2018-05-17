@@ -46,7 +46,7 @@ export default class HalfCircle extends Shape {
     this.p.arc(this.x*this.size + offset, this.y*this.size + offset, this.size, this.size, this.arcStart_, this.arcEnd_)
 
     if (this.animate) {
-      this.moveX()
+      this.move()
     }
   }
 }

@@ -36,7 +36,7 @@ export default class Triangle extends Shape {
     }
 
     if (this.animate) {
-      this.moveX()
+      this.move()
     }
   }
 }
