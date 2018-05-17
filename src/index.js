@@ -4,8 +4,9 @@ import { countColumns, countRows, randomInt } from './helpers.js'
 import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-  let currentArt
+  let grid
   let board
+  let darkMode
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
 
@@ -30,48 +31,49 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.width = CONST.FRAME_WIDTH
         separator.style.left = `${offset}px`
       })
-      init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+      init()
 
       serial = new Serial(p)
     }
 
     p.keyPressed = () => {
       switch (p.keyCode) {
+        // toggle dark mode
         case CONST.KEYCODES['1']: // canvas one, top left
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          changeDarkMode(!darkMode)
           break
         case CONST.KEYCODES['2']: // canvas one, top right
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['5']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['6']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['7']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['8']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['9']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['0']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['hyphen']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         case CONST.KEYCODES['equal']:
-          init(CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)])
+          init()
           break
         default:
           break
@@ -81,14 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
     p.draw = () => {
       p.background(0)
       p.noStroke()
-      if (currentArt) {
-        currentArt.drawGrid()
+      if (grid) {
+        grid.drawGrid()
       }
     }
 
-    const init = (dark) => {
-      currentArt = new Grid(p, CONST.CELL_SIZE, board, dark)
-      currentArt.initGrid()
+    const init = () => {
+      darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
+      grid = new Grid(p, CONST.CELL_SIZE, board, darkMode)
+      grid.initGrid()
+    }
+
+    const changeDarkMode = (isDarkMode) => {
+      darkMode = isDarkMode
+      grid.changeDarkMode(isDarkMode)
     }
   }
 

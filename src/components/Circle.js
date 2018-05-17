@@ -14,7 +14,7 @@ export default class Circle extends Shape {
     this.p.ellipse(this.x*CONST.CELL_SIZE + offset, this.y*CONST.CELL_SIZE + offset, this.size)
 
     if (this.animate) {
-      // this.moveX()
+      this.move()
       this.changeSize()
     }
   }
