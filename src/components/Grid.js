@@ -56,8 +56,8 @@ export default class Grid {
         setTimeout(() => {
           cell.setDarkMode(this.darkMode)
         // }, 25*x + 25*y) // diagonal
-      }, randomInt(500)) // random
-      // }, 25 * x) // horizontal
+        }, randomInt(500)) // random
+        // }, 25 * x) // horizontal
       })
     })
   }
