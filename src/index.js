@@ -1,9 +1,10 @@
-import Grid from './components/Grid.js'
+import Grid from './components/Grid/Grid.js'
+import Stripes from './components/Stripes/Stripes.js'
 import { countColumns, countRows, randomInt } from './helpers.js'
 import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-  let grid
+  let currentState
   let board
   let darkMode
   const body = document.querySelector('body')
@@ -37,11 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         case CONST.KEYCODES['1']: // canvas one, top left
           changeDarkMode(!darkMode)
           break
+        // switch to stripes
         case CONST.KEYCODES['2']: // canvas one, top right
-          init()
+          changeState(Stripes)
           break
+        // switch to rids
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          init()
+          changeState(Grid)
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
           init()
@@ -78,20 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
     p.draw = () => {
       p.background(0)
       p.noStroke()
-      if (grid) {
-        grid.drawGrid()
+      if (currentState) {
+        currentState.draw()
       }
     }
 
     const init = () => {
       darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      grid = new Grid(p, CONST.CELL_SIZE, board, darkMode)
-      grid.initGrid()
+      const State = CONST.ARTS[randomInt(CONST.ARTS.length)]
+      currentState = new State(p, CONST.CELL_SIZE, board, darkMode)
+      currentState.init()
+    }
+
+    const changeState = (state) => {
+      darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
+      currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
+      currentState.init()
     }
 
     const changeDarkMode = (isDarkMode) => {
       darkMode = isDarkMode
-      grid.changeDarkMode(isDarkMode)
+      currentState.changeDarkMode(isDarkMode)
     }
   }
 
