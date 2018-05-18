@@ -7,6 +7,7 @@ export default class Serial {
     this.portName = CONST.SERIAL_PORT
 
     // datastream arrays
+    this.dataArrayInitLength = 12
     this.status = []
     this.touchThresholds = []
     this.releaseThresholds = []
@@ -86,7 +87,7 @@ export default class Serial {
       return;
     }
 
-    for (let i = 0; i < min(array.length, this.splitString.length - 1); i++) {
+    for (let i = 0; i < min(this.dataArrayInitLength, this.splitString.length - 1); i++) {
       array[i] = parseInt(this.p.trim(this.splitString[i + 1]))
     }
 
