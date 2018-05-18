@@ -1,6 +1,6 @@
 import Cell from './Cell.js'
-import CONST from '../constants.js'
-import { randomInt } from '../helpers.js'
+import CONST from '../../constants.js'
+import { randomInt } from '../../helpers.js'
 
 /**
 * Animation ideas:
@@ -16,25 +16,25 @@ export default class Grid {
     this.darkMode = darkMode
   }
 
-  initGrid() {
+  init() {
     this.board.map((column, x) => {
       for (let y = 0; y < column.length; y++) {
-        const cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
-        this.board[x][y] = new Cell(this.p, cellColor, CONST.CELL_SIZE, x, y, this.darkMode)
-        // picking a random shape
         setTimeout(() => {
+          const cellColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
+          this.board[x][y] = new Cell(this.p, cellColor, CONST.CELL_SIZE, x, y, this.darkMode)
+          // picking a random shape
           const Shape = CONST.SHAPE_TYPES[randomInt(CONST.SHAPE_TYPES.length)]
           if (Shape) {
             const innerShapeColor = CONST.COLORS[randomInt(CONST.COLORS.length)]
             this.board[x][y].setShape(new Shape(this.p, this.size, innerShapeColor, CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)], x, y))
           }
-        }, randomInt(300))
-      // }, 25*i + 25*y)
+        // }, randomInt(500))
+        }, 25*x + 25*y)
       }
     })
   }
 
-  drawGrid() {
+  draw() {
     // draw the cell first
     this.board.map(column => {
       column.map(cell => {

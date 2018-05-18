@@ -1,5 +1,5 @@
-import CONST from '../constants.js'
-import { countColumns, countRows, randomInt } from '../helpers.js'
+import CONST from '../../constants.js'
+import { countColumns, countRows, randomInt } from '../../helpers.js'
 
 export default class Shape {
   constructor(p, size, color, animate, x, y) {
@@ -21,6 +21,7 @@ export default class Shape {
     this.minSize_ = randomInt(CONST.CELL_SIZE * 0.5)
     this.maxSize_ = randomInt(this.minSize_, CONST.CELL_SIZE * 2)
     this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
+    this.lastFrame_ = this.p.frameCount
   }
 
   moveX() {
@@ -33,11 +34,11 @@ export default class Shape {
       if (this.x == this.destX_) {
         this.reachedDest_ = true
         this.moveTimer_ = 0.
-        this.lastFrame = this.p.frameCount
+        this.lastFrame_ = this.p.frameCount
         this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
       }
     } else {
-      if ((this.lastFrame - this.p.frameCount) % 3 == 0) {
+      if ((this.lastFrame_ - this.p.frameCount) % 3 == 0) {
         this.destX_ = randomInt(countColumns(this.p.width, CONST.CELL_SIZE))
         this.reachedDest_ = false
       }
@@ -54,11 +55,11 @@ export default class Shape {
       if (this.y == this.destY_) {
         this.reachedDest_ = true
         this.moveTimer_ = 0.
-        this.lastFrame = this.p.frameCount
+        this.lastFrame_ = this.p.frameCount
         this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
       }
     } else {
-      if ((this.lastFrame - this.p.frameCount) % 3 == 0) {
+      if ((this.lastFrame_ - this.p.frameCount) % 3 == 0) {
         this.destY_ = randomInt(countRows(this.p.height, CONST.CELL_SIZE))
         this.reachedDest_ = false
       }

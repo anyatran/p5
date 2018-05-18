@@ -1,4 +1,4 @@
-import CONST from '../constants.js'
+import CONST from '../../constants.js'
 
 export default class Serial {
   constructor(p) {

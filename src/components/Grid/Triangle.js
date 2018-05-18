@@ -1,6 +1,6 @@
-import CONST from '../constants.js'
+import CONST from '../../constants.js'
 import Shape from './Shape.js'
-import { randomInt } from '../helpers.js'
+import { randomInt } from '../../helpers.js'
 
 /**
 * Animation ideas:
