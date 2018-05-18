@@ -14,7 +14,7 @@ export default class Stroke {
   }
 
   init() {
-    this.fall_ = false
+    this.collapse_ = false
     this.timer_ = 0.
     this.speed_ = 0.01
     this.reachedDest_ = false
@@ -33,7 +33,7 @@ export default class Stroke {
     this.p.stroke(this.color)
     this.p.strokeWeight(this.size)
     this.p.strokeCap(this.p.ROUND)
-    this.p.line(this.currentX_ - CONST.CELL_SIZE, (this.currentY_ - 1)*CONST.CELL_SIZE, this.currentDX_*CONST.CELL_SIZE, this.currentDY_*CONST.CELL_SIZE)
+    this.p.line(this.currentX_*CONST.CELL_SIZE, (this.currentY_ - 1)*CONST.CELL_SIZE, this.currentDX_*CONST.CELL_SIZE, this.currentDY_*CONST.CELL_SIZE)
 
     this.animateStroke()
   }
@@ -42,9 +42,9 @@ export default class Stroke {
     const q = this.easing_.linear(this.timer_, this.p) // play around with diff easings
 
     if (!this.reachedDest_) {
-      if (this.fall_) {
-        this.currentX_ = this.p.map(q, 0., 1., this.currentX_, this.destX_)
-        this.currentY_ = this.p.map(q, 0., 1., this.currentY_, this.destY_)
+      if (this.collapse_) {
+        this.currentX_ = this.p.map(q, 0., 1., this.currentX_, this.currentDX_)
+        this.currentY_ = this.p.map(q, 0., 1., this.currentY_, this.currentDY_)
         this.timer_+=this.speed_
 
         if (this.currentX_ == this.destX_ && this.currentY_ == this.destY_) {
@@ -59,7 +59,7 @@ export default class Stroke {
 
         if (this.currentDX_ == this.destX_ && this.currentDY_ == this.destY_) {
           this.timer_ = 0.
-          this.fall_ = true
+          this.collapse_ = true
         }
       }
     } else {
@@ -69,7 +69,7 @@ export default class Stroke {
         this.currentY_ = this.startY
         this.currentDX_ = this.startX
         this.currentDY_ = this.startY
-        this.fall_ = false
+        this.collapse_ = false
         this.reachedDest_ = false
       }
     }
