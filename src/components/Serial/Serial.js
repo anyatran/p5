@@ -22,7 +22,7 @@ export default class Serial {
     this.serial.on('list', this.onList)
     this.serial.on('connected', this.onServerConnected)
     this.serial.on('open', this.onPortOpen)
-    this.serial.on('data', this.onSerialEvent)
+    this.serial.on('data', this.onSerialEvent.bind(this))
     this.serial.on('error', this.onSerialError)
     this.serial.on('close', this.onPortClose)
 
