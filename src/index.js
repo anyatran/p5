@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     p.setup = () => {
       p.createCanvas(body.offsetWidth, body.offsetHeight)
       p.frameRate(30)
-      p.loop()
       // Calculate columns and rows
       const columns = countColumns(p.width, CONST.CELL_SIZE)
       const rows = countRows(p.height, CONST.CELL_SIZE)
@@ -94,9 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const changeState = (state) => {
-      darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
-      currentState.init()
+      currentState.fadeOut()
+      setTimeout(() => {
+        darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
+        currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
+        currentState.init()
+      }, 4000)
     }
 
     const changeDarkMode = (isDarkMode) => {

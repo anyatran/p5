@@ -61,4 +61,23 @@ export default class Grid {
       })
     })
   }
+
+  fadeOut() {
+    this.board.map((column, x) => {
+      column.map((cell, y) => {
+        if (!this.darkMode) {
+          this.darkMode = true
+          setTimeout(() => {
+            cell.setDarkMode(this.darkMode)
+          }, randomInt(500)) // random
+        }
+
+        setTimeout(() => {
+          cell.fadeOut()
+        }, randomInt(500, 1500)) // random
+      })
+    })
+
+
+  }
 }

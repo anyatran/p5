@@ -23,9 +23,10 @@ export default class Stroke {
     this.currentY_ = this.startY
     this.currentDX_ = this.startX
     this.currentDY_ = this.startY
-    this.destX_ = this.rows_ - this.startY + 1
-    this.destY_ = this.rows_ + 1
+    this.destX_ = this.rows_ - this.startY + 3
+    this.destY_ = this.rows_ + 3
     this.lastFrame_ = this.p.frameCount
+    this.stop_ = false
   }
 
   draw() {
@@ -62,16 +63,21 @@ export default class Stroke {
           this.collapse_ = true
         }
       }
-    } else {
       // repeat every 80 frames
-      if ((this.lastFrame_ - this.p.frameCount) % 80 == 0) {
-        this.currentX_ = this.startX
-        this.currentY_ = this.startY
-        this.currentDX_ = this.startX
-        this.currentDY_ = this.startY
-        this.collapse_ = false
-        this.reachedDest_ = false
+      if (!this.stop_) {
+        if ((this.lastFrame_ - this.p.frameCount) % 80 == 0) {
+          this.currentX_ = this.startX
+          this.currentY_ = this.startY
+          this.currentDX_ = this.startX
+          this.currentDY_ = this.startY
+          this.collapse_ = false
+          this.reachedDest_ = false
+        }
       }
     }
+  }
+
+  fadeOut() {
+    this.stop_ = true
   }
  }
