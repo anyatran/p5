@@ -33,4 +33,12 @@ export default class Cell {
       this.shape.draw()
     }
   }
+
+  /**
+  * fade out when transition
+  */
+  fadeOut() {
+    this.setDarkMode(true)
+    this.setShape(null)
+  }
 }

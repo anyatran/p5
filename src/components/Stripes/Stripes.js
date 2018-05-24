@@ -33,4 +33,10 @@ export default class Stripes {
       stroke.draw()
     })
   }
+
+  fadeOut() {
+    this.strokes_.map(stroke => {
+      stroke.fadeOut()
+    })
+  }
 }
