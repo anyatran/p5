@@ -33,4 +33,13 @@ export default class Cell {
       this.shape.draw()
     }
   }
+
+  /**
+  * move down y axis
+  */
+  fallDown() {
+    if (this.shape) {
+      this.shape.fallDown()
+    }
+  }
 }
