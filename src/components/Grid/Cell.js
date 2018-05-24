@@ -38,8 +38,10 @@ export default class Cell {
   * move down y axis
   */
   fallDown() {
-    if (this.shape) {
-      this.shape.fallDown()
-    }
+    this.setDarkMode(true)
+    this.setShape(null)
+    // if (this.shape) {
+    //   this.shape.fallDown()
+    // }
   }
 }
