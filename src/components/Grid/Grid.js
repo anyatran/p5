@@ -77,7 +77,9 @@ export default class Grid {
         }, randomInt(500, 1500)) // random
       })
     })
+  }
 
-
+  triggerSection(sectionNumber) {
+    console.log(sectionNumber)
   }
 }

@@ -39,4 +39,8 @@ export default class Stripes {
       stroke.fadeOut()
     })
   }
+
+  triggerSection(sectionNumber) {
+    console.log(sectionNumber)
+  }
 }

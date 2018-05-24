@@ -35,42 +35,54 @@ document.addEventListener('DOMContentLoaded', () => {
       switch (p.keyCode) {
         // toggle dark mode
         case CONST.KEYCODES['1']: // canvas one, top left
-          changeDarkMode(!darkMode)
+          // changeDarkMode(!darkMode)
+          triggerSection(1)
           break
         // switch to stripes
         case CONST.KEYCODES['2']: // canvas one, top right
-          changeState(Stripes)
+          // changeState(Stripes)
+          triggerSection(2)
           break
         // switch to rids
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          changeState(Grid)
+          // changeState(Grid)
+          triggerSection(3)
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
-          init()
+          // init()
+          triggerSection(4)
           break
         case CONST.KEYCODES['5']:
-          init()
+          // init()
+          triggerSection(5)
           break
         case CONST.KEYCODES['6']:
-          init()
+          // init()
+          triggerSection(6)
           break
         case CONST.KEYCODES['7']:
-          init()
+          // init()
+          triggerSection(7)
           break
         case CONST.KEYCODES['8']:
-          init()
+          // init()
+          triggerSection(8)
           break
         case CONST.KEYCODES['9']:
-          init()
+          // init()
+          triggerSection(9)
           break
         case CONST.KEYCODES['0']:
-          init()
+          // init()
+          triggerSection(10)
           break
         case CONST.KEYCODES['hyphen']:
-          init()
+          // init()
+          triggerSection(11)
           break
         case CONST.KEYCODES['equal']:
-          init()
+          // init()
+          triggerSection(12)
           break
         default:
           break
@@ -104,6 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const changeDarkMode = (isDarkMode) => {
       darkMode = isDarkMode
       currentState.changeDarkMode(isDarkMode)
+    }
+
+    const triggerSection = (sectionNumber) => {
+      currentState.triggerSection(sectionNumber)
     }
   }
 
