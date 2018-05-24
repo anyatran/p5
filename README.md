@@ -13,8 +13,10 @@ UQ Happy Hour Interactive Installation -- SFDW 2018
 - [Touch Board + Processing](https://www.bareconductive.com/make/touch-board-grapher/)
 
 ## Section division
+```
 ._____.  ._____.  ._____.
 |__1__|  |__5__|  |__9__|
 |__2__|  |__6__|  |__10_|
 |__3__|  |__7__|  |__11_|
 |__4__|  |__8__|  |__12_|
+```
