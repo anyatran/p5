@@ -73,7 +73,7 @@ export default class Grid {
         }
 
         setTimeout(() => {
-          cell.fallDown()
+          cell.fadeOut()
         }, randomInt(500, 1500)) // random
       })
     })

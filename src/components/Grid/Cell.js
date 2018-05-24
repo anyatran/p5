@@ -35,13 +35,10 @@ export default class Cell {
   }
 
   /**
-  * move down y axis
+  * fade out when transition
   */
-  fallDown() {
+  fadeOut() {
     this.setDarkMode(true)
     this.setShape(null)
-    // if (this.shape) {
-    //   this.shape.fallDown()
-    // }
   }
 }
