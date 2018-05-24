@@ -43,40 +43,37 @@ export default class Stroke {
     const q = this.easing_.linear(this.timer_, this.p) // play around with diff easings
 
     if (!this.reachedDest_) {
-        // if (!this.reachedDest_) {
-        if (this.collapse_) {
-          this.currentX_ = this.p.map(q, 0., 1., this.currentX_, this.currentDX_)
-          this.currentY_ = this.p.map(q, 0., 1., this.currentY_, this.currentDY_)
-          this.timer_+=this.speed_
+      if (this.collapse_) {
+        this.currentX_ = this.p.map(q, 0., 1., this.currentX_, this.currentDX_)
+        this.currentY_ = this.p.map(q, 0., 1., this.currentY_, this.currentDY_)
+        this.timer_+=this.speed_
 
-          if (this.currentX_ == this.destX_ && this.currentY_ == this.destY_) {
-            this.timer_ = 0.
-            this.reachedDest_ = true
-            this.lastFrame_ = this.p.frameCount
-          }
-        } else {
-          this.currentDX_ = this.p.map(q, 0., 1., this.currentDX_, this.destX_)
-          this.currentDY_ = this.p.map(q, 0., 1., this.currentDY_, this.destY_)
-          this.timer_+=this.speed_
+        if (this.currentX_ == this.destX_ && this.currentY_ == this.destY_) {
+          this.timer_ = 0.
+          this.reachedDest_ = true
+          this.lastFrame_ = this.p.frameCount
+        }
+      } else {
+        this.currentDX_ = this.p.map(q, 0., 1., this.currentDX_, this.destX_)
+        this.currentDY_ = this.p.map(q, 0., 1., this.currentDY_, this.destY_)
+        this.timer_+=this.speed_
 
-          if (this.currentDX_ == this.destX_ && this.currentDY_ == this.destY_) {
-            this.timer_ = 0.
-            this.collapse_ = true
-          }
+        if (this.currentDX_ == this.destX_ && this.currentDY_ == this.destY_) {
+          this.timer_ = 0.
+          this.collapse_ = true
         }
-      // } else {
-        // repeat every 80 frames
-        if (!this.stop_) {
-          if ((this.lastFrame_ - this.p.frameCount) % 80 == 0) {
-            this.currentX_ = this.startX
-            this.currentY_ = this.startY
-            this.currentDX_ = this.startX
-            this.currentDY_ = this.startY
-            this.collapse_ = false
-            this.reachedDest_ = false
-          }
+      }
+      // repeat every 80 frames
+      if (!this.stop_) {
+        if ((this.lastFrame_ - this.p.frameCount) % 80 == 0) {
+          this.currentX_ = this.startX
+          this.currentY_ = this.startY
+          this.currentDX_ = this.startX
+          this.currentDY_ = this.startY
+          this.collapse_ = false
+          this.reachedDest_ = false
         }
-      // }
+      }
     }
   }
 

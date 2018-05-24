@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     p.setup = () => {
       p.createCanvas(body.offsetWidth, body.offsetHeight)
       p.frameRate(30)
-      p.loop()
       // Calculate columns and rows
       const columns = countColumns(p.width, CONST.CELL_SIZE)
       const rows = countRows(p.height, CONST.CELL_SIZE)

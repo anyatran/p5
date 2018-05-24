@@ -38,12 +38,6 @@ export default class Shape {
         this.reachedDest_ = true
         this.moveTimer_ = 0.
         this.lastFrame_ = this.p.frameCount
-        this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      }
-    } else {
-      if ((this.lastFrame_ - this.p.frameCount) % 3 == 0) {
-        this.destX_ = randomInt(countColumns(this.p.width, CONST.CELL_SIZE))
-        this.reachedDest_ = false
       }
     }
   }
@@ -62,12 +56,6 @@ export default class Shape {
         this.reachedDest_ = true
         this.moveTimer_ = 0.
         this.lastFrame_ = this.p.frameCount
-        this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      }
-    } else {
-      if ((this.lastFrame_ - this.p.frameCount) % 3 == 0) {
-        this.destY_ = randomInt(countRows(this.p.height, CONST.CELL_SIZE))
-        this.reachedDest_ = false
       }
     }
   }
@@ -77,6 +65,18 @@ export default class Shape {
       this.moveX()
     } else {
       this.moveY()
+    }
+
+    if (this.reachedDest_) {
+      this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
+      if ((this.lastFrame_ - this.p.frameCount) % 3 == 0) {
+        if (this.isMoveX_) {
+          this.destX_ = randomInt(countColumns(this.p.width, CONST.CELL_SIZE))
+        } else {
+          this.destY_ = randomInt(countRows(this.p.height, CONST.CELL_SIZE))
+        }
+        this.reachedDest_ = false
+      }
     }
   }
 
