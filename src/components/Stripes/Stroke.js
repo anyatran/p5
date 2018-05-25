@@ -80,4 +80,8 @@ export default class Stroke {
   fadeOut() {
     this.stop_ = true
   }
+
+  trigger() {
+    console.log('trigger')
+  }
  }

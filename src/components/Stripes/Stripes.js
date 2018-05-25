@@ -41,6 +41,7 @@ export default class Stripes {
   }
 
   triggerSection(sectionNumber) {
-    console.log(sectionNumber)
+    // console.log(this.p.height + 100)
+    // this.strokes_.forEach(stroke => stroke.trigger())
   }
 }

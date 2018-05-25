@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentState
   let board
   let darkMode
+  let swirl = false
+  let zoom = 1
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
 
@@ -36,29 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
         // toggle dark mode
         case CONST.KEYCODES['1']: // canvas one, top left
           // changeDarkMode(!darkMode)
-          triggerSection(1)
+          // zoom in
+          zoom += 0.5
           break
         // switch to stripes
         case CONST.KEYCODES['2']: // canvas one, top right
-          // changeState(Stripes)
-          triggerSection(2)
+          // zoom out
+          if (zoom > 1) {
+            zoom -= 0.5
+          }
           break
-        // switch to rids
+        // switch to grids
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          // changeState(Grid)
-          triggerSection(3)
+          changeState(Grid)
+          // triggerSection(3)
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
-          // init()
-          triggerSection(4)
+          // switch to stripes
+          changeState(Stripes)
           break
         case CONST.KEYCODES['5']:
-          // init()
-          triggerSection(5)
+          // dark mode toggle
+          changeDarkMode(!darkMode)
           break
         case CONST.KEYCODES['6']:
           // init()
-          triggerSection(6)
+          swirl = !swirl
           break
         case CONST.KEYCODES['7']:
           // init()
@@ -92,6 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
     p.draw = () => {
       p.background(0)
       p.noStroke()
+      p.scale(zoom)
+      if (swirl) {
+        // p.shearX(p.PI / -4.0);
+        // p.translate(p.width / 2, p.height / 2);
+        // p.translate(p5.Vector.fromAngle(p.millis() / 1000, 0));
+        p.translate(p5.Vector.fromAngle(p.PI).mult(p.random(10, 100)))
+      }
       if (currentState) {
         currentState.draw()
       }
