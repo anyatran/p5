@@ -96,10 +96,10 @@ export default class Grid {
     const sectionStartY = this.p.floor(sectionNumber % 4) * this.sectionHeight // start from 1
     const sectionEndY = sectionStartY + this.sectionHeight - 1
     console.log(this.board, this.sectionWidth, this.sectionHeight, sectionStartX, sectionStartY, sectionEndX, sectionEndY)
-    for (let i = sectionStartX; i < this.board.length; i++) {
+    for (let i = sectionStartX; i <= sectionEndX; i++) {
       const column = this.board[i]
       console.log(i, column)
-      for (let j = sectionStartY; j < column.length; j++) {
+      for (let j = sectionStartY; j <= sectionEndY; j++) {
         column[j].toggleDarkMode()
       }
     }
