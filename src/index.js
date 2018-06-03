@@ -5,9 +5,11 @@ import CONST from './constants.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   let currentState
+  let interval
   let board
   let darkMode
-  let swirl = false
+  let isShacking = false
+  const scenes = [Grid, Stripes]
   let zoom = 1
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.left = `${offset}px`
       })
       init()
+
+      interval = setInterval(() => init(), 15000)
     }
 
     p.keyPressed = () => {
@@ -39,55 +43,66 @@ document.addEventListener('DOMContentLoaded', () => {
         case CONST.KEYCODES['1']: // canvas one, top left
           // changeDarkMode(!darkMode)
           // zoom in
-          zoom += 0.5
+          // zoom += 0.5
+          currentState.keyPressed(1)
           break
         // switch to stripes
         case CONST.KEYCODES['2']: // canvas one, top right
           // zoom out
-          if (zoom > 1) {
-            zoom -= 0.5
-          }
+          // if (zoom > 1) {
+          //   zoom -= 0.5
+          // }
+          currentState.keyPressed(2)
           break
         // switch to grids
         case CONST.KEYCODES['3']: // canvas one, bottom left
-          changeState(Grid)
-          // triggerSection(3)
+          // changeState(Grid)
+          currentState.keyPressed(3)
           break
         case CONST.KEYCODES['4']: // canvas one, bottom right
           // switch to stripes
-          changeState(Stripes)
+          // changeState(Stripes)
+          currentState.keyPressed(4)
           break
         case CONST.KEYCODES['5']:
           // dark mode toggle
-          changeDarkMode(!darkMode)
+          // changeDarkMode(!darkMode)
+          currentState.keyPressed(5)
           break
         case CONST.KEYCODES['6']:
           // init()
-          swirl = !swirl
+          // isShacking = !isShacking
+          currentState.keyPressed(6)
           break
         case CONST.KEYCODES['7']:
           // init()
-          triggerSection(7)
+          // triggerSection(7)
+          currentState.keyPressed(7)
           break
         case CONST.KEYCODES['8']:
           // init()
-          triggerSection(8)
+          // triggerSection(8)
+          currentState.keyPressed(8)
           break
         case CONST.KEYCODES['9']:
           // init()
-          triggerSection(9)
+          // triggerSection(9)
+          currentState.keyPressed(9)
           break
         case CONST.KEYCODES['0']:
           // init()
-          triggerSection(10)
+          // triggerSection(10)
+          currentState.keyPressed(10)
           break
         case CONST.KEYCODES['hyphen']:
           // init()
-          triggerSection(11)
+          // triggerSection(11)
+          currentState.keyPressed(11)
           break
         case CONST.KEYCODES['equal']:
           // init()
-          triggerSection(12)
+          // triggerSection(12)
+          currentState.keyPressed(12)
           break
         default:
           break
@@ -98,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       p.background(0)
       p.noStroke()
       p.scale(zoom)
-      if (swirl) {
+      if (isShacking) {
         // p.shearX(p.PI / -4.0);
         // p.translate(p.width / 2, p.height / 2);
         // p.translate(p5.Vector.fromAngle(p.millis() / 1000, 0));
@@ -111,17 +126,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const init = () => {
       darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      const State = CONST.ARTS[randomInt(CONST.ARTS.length)]
+      const State = scenes[randomInt(scenes.length)]
       currentState = new State(p, CONST.CELL_SIZE, board, darkMode)
       currentState.init()
     }
 
     const changeState = (state) => {
       currentState.fadeOut()
+      isShacking = true
+      clearInterval(interval)
       setTimeout(() => {
         darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
         currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
+        isShacking = false
         currentState.init()
+        interval = setInterval(() => init(), 15000)
       }, 4000)
     }
 

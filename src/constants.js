@@ -1,12 +1,11 @@
+import Grid from './components/Grid/Grid.js'
 import Circle from './components/Grid/Circle.js'
 import HalfCircle from './components/Grid/HalfCircle.js'
 import Triangle from './components/Grid/Triangle.js'
-import Grid from './components/Grid/Grid.js'
 import Stripes from './components/Stripes/Stripes.js'
 
  // TODO IMPORT GRID
 export default {
-  ARTS: [Stripes],
   BOOLEANS: [true, false],
   CANVAS_WIDTH: 600,
   CANVAS_HEIGHT: 600,

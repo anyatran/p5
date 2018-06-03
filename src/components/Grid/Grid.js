@@ -32,6 +32,10 @@ export default class Grid {
         }, 25*x + 25*y)
       }
     })
+    const canvasWidth = this.p.width / 3
+    const canvasHeight = this.p.height
+    this.sectionWidth = this.p.round(canvasWidth / this.size)
+    this.sectionHeight = this.p.round(canvasHeight / 4 / this.size)
   }
 
   draw() {
@@ -81,5 +85,27 @@ export default class Grid {
 
   triggerSection(sectionNumber) {
     console.log(sectionNumber)
+  }
+
+
+  getSection(key) {
+    console.log(key)
+    const sectionNumber = key - 1
+    const sectionStartX = this.p.floor(sectionNumber / 4) * this.sectionWidth // starts w 1
+    const sectionEndX = sectionStartX + this.sectionWidth - 1
+    const sectionStartY = this.p.floor(sectionNumber % 4) * this.sectionHeight // start from 1
+    const sectionEndY = sectionStartY + this.sectionHeight - 1
+    console.log(this.board, this.sectionWidth, this.sectionHeight, sectionStartX, sectionStartY, sectionEndX, sectionEndY)
+    for (let i = sectionStartX; i < this.board.length; i++) {
+      const column = this.board[i]
+      console.log(i, column)
+      for (let j = sectionStartY; j < column.length; j++) {
+        column[j].toggleDarkMode()
+      }
+    }
+  }
+
+  keyPressed(key) {
+    this.getSection(key)
   }
 }
