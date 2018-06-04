@@ -34,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       init()
 
-      interval = setInterval(() => init(), 15000)
+      interval = setInterval(() =>  {
+        const State = scenes[randomInt(scenes.length)]
+        changeState(State)
+      }, 15000)
     }
 
     p.keyPressed = () => {
@@ -134,13 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const changeState = (state) => {
       currentState.fadeOut()
       isShacking = true
+      console.log(isShacking)
       clearInterval(interval)
       setTimeout(() => {
         darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
         currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
         isShacking = false
         currentState.init()
-        interval = setInterval(() => init(), 15000)
+
+        // reset interval
+        interval = setInterval(() =>  {
+          const State = scenes[randomInt(scenes.length)]
+          changeState(State)
+        }, 15000)
       }, 4000)
     }
 

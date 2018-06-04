@@ -94,13 +94,15 @@ export default class Grid {
     const sectionStartX = this.p.floor(sectionNumber / 4) * this.sectionWidth // starts w 1
     const sectionEndX = sectionStartX + this.sectionWidth - 1
     const sectionStartY = this.p.floor(sectionNumber % 4) * this.sectionHeight // start from 1
-    const sectionEndY = sectionStartY + this.sectionHeight - 1
+    let sectionEndY = sectionStartY + this.sectionHeight - 1
+    if (sectionEndY > this.p.floor(this.p.height / this.size) - 1) {
+      sectionEndY = this.p.floor(this.p.height / this.size) - 1
+    }
     console.log(this.board, this.sectionWidth, this.sectionHeight, sectionStartX, sectionStartY, sectionEndX, sectionEndY)
     for (let i = sectionStartX; i <= sectionEndX; i++) {
       const column = this.board[i]
-      console.log(i, column)
       for (let j = sectionStartY; j <= sectionEndY; j++) {
-        column[j].toggleDarkMode()
+        setTimeout(() => column[j].toggleDarkMode(), randomInt(800))
       }
     }
   }
