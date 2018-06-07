@@ -9,11 +9,6 @@ export default class Serial {
     // datastream arrays
     this.dataArrayInitLength = 12
     this.status = []
-    this.touchThresholds = []
-    this.releaseThresholds = []
-    this.filteredData = []
-    this.baselineVals = []
-    this.diffs = []
 
     this.init()
   }
@@ -26,7 +21,7 @@ export default class Serial {
     this.serial.on('error', this.onSerialError)
     this.serial.on('close', this.onPortClose)
 
-    // this.serial.open(this.portName)
+    this.serial.open(this.portName)
   }
 
   onList(portList) {
@@ -36,41 +31,21 @@ export default class Serial {
   }
 
   onServerConnected() {
-    console.log('connected to server')
-  }
+    console.log('connected to server')  }
 
   onPortOpen() {
     console.log('serial port opened')
   }
 
   onSerialEvent() {
-    console.log('serial event')
+    // console.log('serial event')
 
-    // should receive a string like "TTHS: 40 40 40 40 40 40 40 40 40 40 40 40 40"
-    const inString = this.serial.readString()
-    const splitString = this.p.splitTokens(inString, ': ')
-    console.log(splitString)
-
-    // save values to relevant array
-    switch (splitString[0]) {
-      case 'TOUCH':
-        this.updateArraySerial(this.status)
-        break
-      case 'TTHS':
-        this.updateArraySerial(this.touchThresholds)
-        break
-      case 'RTHS':
-        this.updateArraySerial(this.releaseThresholds)
-        break
-      case 'FDAT':
-        this.updateArraySerial(this.filteredData)
-        break
-      case 'BVAL':
-        this.updateArraySerial(this.baselineVals)
-        break
-      case 'DIFF':
-        this.updateArraySerial(this.diffs)
-        break
+    const inString = this.serial.readStringUntil('\r\n')
+    if (inString.length > 0) {
+      const splitString = this.p.splitTokens(inString, ' ')
+      if (splitString[0] == 'TCH') {
+        console.log('touch', splitString[1])
+      }
     }
   }
 
@@ -80,17 +55,5 @@ export default class Serial {
 
   onPortClose() {
     console.log('serial port closed')
-  }
-
-  updateArraySerial(array) {
-    if (array == null) {
-      return;
-    }
-
-    for (let i = 0; i < min(this.dataArrayInitLength, this.splitString.length - 1); i++) {
-      array[i] = parseInt(this.p.trim(this.splitString[i + 1]))
-    }
-
-    console.log(array)
   }
 }
