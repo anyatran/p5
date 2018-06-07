@@ -81,6 +81,18 @@ export default class Stroke {
     this.stop_ = true
   }
 
+  freeze() {
+    // if (!this.collapse_) {
+      this.startX = randomInt(0, 50)
+      this.startY = randomInt(0, 20)
+      this.destX_ = randomInt(0, 50)
+      this.destY_ = randomInt(0, 30)
+    // } else {
+      // this.destX_ = randomInt(-10, 10)
+      // this.destY_ = randomInt(-10, 10)
+    // }
+  }
+
   trigger() {
     console.log('trigger')
   }

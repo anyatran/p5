@@ -88,9 +88,8 @@ export default class Grid {
   }
 
 
-  getSection(key) {
-    console.log(key)
-    const sectionNumber = key - 1
+  getSection(sectionNumber) {
+    console.log(sectionNumber)
     const sectionStartX = this.p.floor(sectionNumber / 4) * this.sectionWidth // starts w 1
     const sectionEndX = sectionStartX + this.sectionWidth - 1
     const sectionStartY = this.p.floor(sectionNumber % 4) * this.sectionHeight // start from 1
@@ -107,7 +106,7 @@ export default class Grid {
     }
   }
 
-  keyPressed(key) {
+  onTouch(key) {
     this.getSection(key)
   }
 }

@@ -7,9 +7,12 @@ export default class Cell {
     this.size = size
     this.x = x
     this.y = y
-    this.darkMode = darkMode
-    this.opacity = 1
-    // this.m = 1
+
+    this.init(darkMode)
+  }
+
+  init(darkMode) {
+    this.setDarkMode(darkMode)
   }
 
   setShape(shape) {
@@ -17,7 +20,6 @@ export default class Cell {
   }
 
   setDarkMode(darkMode) {
-    console.log(darkMode)
     this.darkMode = darkMode
     this.opacity = darkMode ? 0 : 1
   }
@@ -50,5 +52,6 @@ export default class Cell {
   fadeOut() {
     this.setDarkMode(true)
     this.setShape(null)
+    // console.log(this.shape)
   }
 }

@@ -4,12 +4,14 @@ import { countRows, randomInt } from '../../helpers.js'
 
 export default class Stripes {
   constructor(p, size, board, darkMode) {
+    this.angle = 0
     this.p = p
     this.size = size
     this.board = board
     this.darkMode = darkMode
 
     this.strokes_ = []
+    this.swirl_ = false
   }
 
   init() {
@@ -29,7 +31,17 @@ export default class Stripes {
   }
 
   draw() {
-    this.p.rotate(this.p.HALF_PI)
+    const step = this.p.frameCount % 200
+    const angle = this.p.map(step, 0, 200, 0, this.p.TWO_PI)
+    const cosA = this.p.cos(angle)
+    const sinA = this.p.sin(angle)
+    if (this.swirl_) {
+      this.p.applyMatrix(cosA, sinA, -sinA, cosA, this.p.width / 2, this.p.height / 2)
+    } else {
+      this.p.resetMatrix()
+    }
+    // this.p.applyMatrix(cosA, sinA, -sinA, cosA, 0, 0)
+    // this.p.rotate(this.angle)
     this.strokes_.map(stroke => {
       stroke.draw()
     })
@@ -41,8 +53,23 @@ export default class Stripes {
     })
   }
 
-  triggerSection(sectionNumber) {
-    // console.log(this.p.height + 100)
-    // this.strokes_.forEach(stroke => stroke.trigger())
+  freeze() {
+    this.strokes_.map(stroke => stroke.freeze())
+  }
+
+  onTouch(electrodeNumber) {
+    console.log('strikes', electrodeNumber)
+    switch (electrodeNumber) {
+      case 1:
+        // this.angle = this.p.HALF_PI
+        this.swirl_ = !this.swirl_
+        break;
+      case 2:
+        this.freeze()
+        break;
+      default:
+        this.angle = 0
+        break;
+    }
   }
 }

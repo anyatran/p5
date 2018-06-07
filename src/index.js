@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let board
   let darkMode
   let isShacking = false
-  const scenes = [Grid, Stripes]
+  let serial
   let zoom = 1
+  const scenes = [Grid, Stripes]
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
 
   const sketch = (p) => {
-    let serial
 
     p.setup = () => {
       p.createCanvas(body.offsetWidth, body.offsetHeight)
@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.left = `${offset}px`
       })
       init()
-      serial = new Serial(p)
 
       interval = setInterval(() =>  {
         const State = scenes[randomInt(scenes.length)]
@@ -45,74 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     p.keyPressed = () => {
-      switch (p.keyCode) {
-        // toggle dark mode
-        case CONST.KEYCODES['1']: // canvas one, top left
-          // changeDarkMode(!darkMode)
-          // zoom in
-          // zoom += 0.5
-          currentState.keyPressed(1)
-          break
-        // switch to stripes
-        case CONST.KEYCODES['2']: // canvas one, top right
-          // zoom out
-          // if (zoom > 1) {
-          //   zoom -= 0.5
-          // }
-          currentState.keyPressed(2)
-          break
-        // switch to grids
-        case CONST.KEYCODES['3']: // canvas one, bottom left
-          // changeState(Grid)
-          currentState.keyPressed(3)
-          break
-        case CONST.KEYCODES['4']: // canvas one, bottom right
-          // switch to stripes
-          // changeState(Stripes)
-          currentState.keyPressed(4)
-          break
-        case CONST.KEYCODES['5']:
-          // dark mode toggle
-          // changeDarkMode(!darkMode)
-          currentState.keyPressed(5)
-          break
-        case CONST.KEYCODES['6']:
-          // init()
-          // isShacking = !isShacking
-          currentState.keyPressed(6)
-          break
-        case CONST.KEYCODES['7']:
-          // init()
-          // triggerSection(7)
-          currentState.keyPressed(7)
-          break
-        case CONST.KEYCODES['8']:
-          // init()
-          // triggerSection(8)
-          currentState.keyPressed(8)
-          break
-        case CONST.KEYCODES['9']:
-          // init()
-          // triggerSection(9)
-          currentState.keyPressed(9)
-          break
-        case CONST.KEYCODES['0']:
-          // init()
-          // triggerSection(10)
-          currentState.keyPressed(10)
-          break
-        case CONST.KEYCODES['hyphen']:
-          // init()
-          // triggerSection(11)
-          currentState.keyPressed(11)
-          break
-        case CONST.KEYCODES['equal']:
-          // init()
-          // triggerSection(12)
-          currentState.keyPressed(12)
-          break
-        default:
-          break
+      if (CONST.KEYCODES[p.keyCode] !== undefined) {
+        currentState.onTouch(CONST.KEYCODES[p.keyCode])
       }
     }
 
@@ -136,18 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const State = scenes[randomInt(scenes.length)]
       currentState = new State(p, CONST.CELL_SIZE, board, darkMode)
       currentState.init()
+      serial = new Serial(p, currentState)
     }
 
     const changeState = (state) => {
       currentState.fadeOut()
       isShacking = true
-      console.log(isShacking)
       clearInterval(interval)
       setTimeout(() => {
         darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
         currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
         isShacking = false
         currentState.init()
+        serial.updateState(currentState)
 
         // reset interval
         interval = setInterval(() =>  {

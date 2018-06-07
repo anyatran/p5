@@ -1,27 +1,31 @@
 import CONST from '../../constants.js'
 
 export default class Serial {
-  constructor(p) {
+  constructor(p, currentState) {
     this.p = p
-    this.serial = new p5.SerialPort()
-    this.portName = CONST.SERIAL_PORT
+    this.currentState = currentState
+    this.serial_ = new p5.SerialPort()
 
     // datastream arrays
-    this.dataArrayInitLength = 12
-    this.status = []
+    // this.dataArrayInitLength = 12
+    // this.status = []
 
     this.init()
   }
 
   init() {
-    this.serial.on('list', this.onList)
-    this.serial.on('connected', this.onServerConnected)
-    this.serial.on('open', this.onPortOpen)
-    this.serial.on('data', this.onSerialEvent.bind(this))
-    this.serial.on('error', this.onSerialError)
-    this.serial.on('close', this.onPortClose)
+    this.serial_.on('list', this.onList)
+    this.serial_.on('connected', this.onServerConnected)
+    this.serial_.on('open', this.onPortOpen)
+    this.serial_.on('data', this.onSerialEvent.bind(this))
+    this.serial_.on('error', this.onSerialError)
+    this.serial_.on('close', this.onPortClose)
 
-    this.serial.open(this.portName)
+    this.serial_.open(CONST.SERIAL_PORT)
+  }
+
+  updateState(state) {
+    this.currentState = state
   }
 
   onList(portList) {
@@ -38,16 +42,20 @@ export default class Serial {
   }
 
   onSerialEvent() {
-    // console.log('serial event')
-
-    const inString = this.serial.readStringUntil('\r\n')
+    const inString = this.serial_.readStringUntil('\r\n')
     if (inString.length > 0) {
       const splitString = this.p.splitTokens(inString, ' ')
       const eventType = splitString[0]
-      if ( eventType == 'TCH') {
-        console.log('touch', splitString[1])
-      } else if ( eventType == 'RLS') {
-        console.log('release', splitString[1])
+      const electrode = splitString[1]
+      switch (eventType) {
+        case 'TCH':
+          this.touchEvent(electrode)
+          break;
+        case 'RLS':
+          this.releaseEvent(electrode)
+          break;
+        default:
+          break;
       }
     }
   }
@@ -58,5 +66,20 @@ export default class Serial {
 
   onPortClose() {
     console.log('serial port closed')
+  }
+
+  touchEvent(electrodeNumber) {
+    console.log('touch', electrodeNumber)
+    this.currentState.onTouch(electrodeNumber)
+  }
+
+  releaseEvent(electrodeNumber) {
+    console.log('release', electrodeNumber)
+    switch (electrodeNumber) {
+      case 1:
+        break;
+      default:
+        break;
+    }
   }
 }

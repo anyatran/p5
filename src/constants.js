@@ -13,7 +13,7 @@ export default {
   COLORS: ['#000000', '#FF4047', '#FFE66E', '#23E8A7', '#2C72F1', '#96D7FE', '#CD4AF4', '#FFDAE2'],
   FOUR_DIRECTIONS: ['top', 'left', 'bottom', 'right'],
   FRAME_WIDTH: 100, // 300
-  KEYCODES: {'1': 49, '2': 50, '3': 51, '4': 52, '5': 53, '6': 54, '7': 55, '8': 56, '9': 57, '0': 48, 'hyphen': 189, 'equal': 187},
+  KEYCODES: { 192: 0, 49: 1, 50: 2, 51: 3, 52: 4, 53: 5, 54: 6, 55: 7, 56: 8, 57: 9, 48: 10, 189: 11, },
   SERIAL_PORT: '/dev/cu.usbmodem1461', // temp
   SHAPE_TYPES: [null, Circle, HalfCircle, Triangle],
   TWO_DIRECTIONS: ['left', 'right'],
