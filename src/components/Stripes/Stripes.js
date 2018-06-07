@@ -29,6 +29,7 @@ export default class Stripes {
   }
 
   draw() {
+    this.p.rotate(this.p.HALF_PI)
     this.strokes_.map(stroke => {
       stroke.draw()
     })
