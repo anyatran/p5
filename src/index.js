@@ -1,3 +1,4 @@
+import Serial from './components/Serial/Serial.js'
 import Grid from './components/Grid/Grid.js'
 import Stripes from './components/Stripes/Stripes.js'
 import { countColumns, countRows, randomInt } from './helpers.js'
@@ -15,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const separators = document.querySelectorAll('[data-separator]')
 
   const sketch = (p) => {
+    let serial
+
     p.setup = () => {
       p.createCanvas(body.offsetWidth, body.offsetHeight)
       p.frameRate(30)
@@ -33,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         separator.style.left = `${offset}px`
       })
       init()
+      serial = new Serial(p)
 
       interval = setInterval(() =>  {
         const State = scenes[randomInt(scenes.length)]
