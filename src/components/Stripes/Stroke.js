@@ -16,7 +16,7 @@ export default class Stroke {
   init() {
     this.collapse_ = false
     this.timer_ = 0.
-    this.speed_ = 0.01
+    this.speed_ = 0.005
     this.reachedDest_ = false
     this.rows_ = countRows(this.p.height, CONST.CELL_SIZE)
     this.currentX_ = this.startX

@@ -37,7 +37,7 @@ export default class Shape {
       if (this.x == this.destX_) {
         this.reachedDest_ = true
         this.moveTimer_ = 0.
-        this.lastFrame_ = this.p.frameCount
+        // this.lastFrame_ = this.p.frameCount
       }
     }
   }
@@ -55,7 +55,8 @@ export default class Shape {
       if (this.y == this.destY_) {
         this.reachedDest_ = true
         this.moveTimer_ = 0.
-        this.lastFrame_ = this.p.frameCount
+        // console.log(this.lastFrame_, this.p.frameCount)
+        // this.lastFrame_ = this.p.frameCount
       }
     }
   }
@@ -69,12 +70,13 @@ export default class Shape {
 
     if (this.reachedDest_) {
       this.isMoveX_ = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-      if ((this.lastFrame_ - this.p.frameCount) % 3 == 0) {
+      if ((this.lastFrame_ - this.p.frameCount) % 20 == 0) {
         if (this.isMoveX_) {
           this.destX_ = randomInt(countColumns(this.p.width, CONST.CELL_SIZE))
         } else {
           this.destY_ = randomInt(countRows(this.p.height, CONST.CELL_SIZE))
         }
+        this.lastFrame_ = this.p.frameCount
         this.reachedDest_ = false
       }
     }

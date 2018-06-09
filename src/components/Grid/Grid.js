@@ -1,4 +1,5 @@
 import Cell from './Cell.js'
+import Sound from '../Sound/Sound.js'
 import CONST from '../../constants.js'
 import { randomInt } from '../../helpers.js'
 
@@ -36,6 +37,7 @@ export default class Grid {
     const canvasHeight = this.p.height
     this.sectionWidth = this.p.round(canvasWidth / this.size)
     this.sectionHeight = this.p.round(canvasHeight / 4 / this.size)
+    this.sound.play()
   }
 
   draw() {
@@ -81,6 +83,15 @@ export default class Grid {
         }, randomInt(500, 1500)) // random
       })
     })
+    this.sound.stop(1)
+  }
+
+  setSound(sound) {
+    this.sound = sound
+  }
+
+  isDiagonal() {
+    return false
   }
 
   triggerSection(sectionNumber) {

@@ -28,6 +28,7 @@ export default class Stripes {
       }, 300*i)
 
     }
+    this.sound.play()
   }
 
   draw() {
@@ -71,5 +72,13 @@ export default class Stripes {
         this.angle = 0
         break;
     }
+  }
+
+  isDiagonal() {
+    return true
+  }
+
+  setSound(sound) {
+    this.sound = sound
   }
 }
