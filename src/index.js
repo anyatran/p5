@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     p.preload = () => {
       backgroundSound = new Sound(p, '../sounds/background.wav', true)
       shackingSound = new Sound(p, '../sounds/rhythm/sparse-drum2.wav', true)
-      gridSound = new Sound(p, '../sounds/main-loop/filter-sine.wav', true)
+      gridSound = new Sound(p, '../sounds/main-loop/endless.wav', true)
       diagonalSound = new Sound(p, '../sounds/main-loop/visualizerloops.wav', true)
       gridSounds.push(new Sound(p, '../sounds/pads/simple-bells.wav', false))
     }
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       init()
+      backgroundSound.setVolume(0.3)
       backgroundSound.play()
       interval = setInterval(() =>  {
         const State = scenes[randomInt(scenes.length)]
