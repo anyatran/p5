@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sketch = (p) => {
 
     p.preload = () => {
-      backgroundSound = new Sound(p, '../sounds/background.wav', true)
+      backgroundSound = new Sound(p, '../sounds/bg.wav', true)
       shackingSound = new Sound(p, '../sounds/rhythm/sparse-drum2.wav', true)
       gridSound = new Sound(p, '../sounds/main-loop/endless.wav', true)
       diagonalSound = new Sound(p, '../sounds/main-loop/visualizerloops.wav', true)
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       interval = setInterval(() =>  {
         const State = scenes[randomInt(scenes.length)]
         changeState(State)
-      }, 15000)
+      }, 28000)
     }
 
     p.keyPressed = () => {
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         interval = setInterval(() =>  {
           const State = scenes[randomInt(scenes.length)]
           changeState(State)
-        }, 15000)
+        }, 28000)
       }, 4000)
     }
 
