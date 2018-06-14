@@ -6,10 +6,6 @@ export default class Serial {
     this.currentState = currentState
     this.serial_ = new p5.SerialPort()
 
-    // datastream arrays
-    // this.dataArrayInitLength = 12
-    // this.status = []
-
     this.init()
   }
 
@@ -51,9 +47,6 @@ export default class Serial {
         case 'TCH':
           this.touchEvent(electrode)
           break;
-        case 'RLS':
-          this.releaseEvent(electrode)
-          break;
         default:
           break;
       }
@@ -71,15 +64,5 @@ export default class Serial {
   touchEvent(electrodeNumber) {
     console.log('touch', electrodeNumber)
     this.currentState.onTouch(electrodeNumber)
-  }
-
-  releaseEvent(electrodeNumber) {
-    console.log('release', electrodeNumber)
-    switch (electrodeNumber) {
-      case 1:
-        break;
-      default:
-        break;
-    }
   }
 }

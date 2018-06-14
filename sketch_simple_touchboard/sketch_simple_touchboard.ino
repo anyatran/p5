@@ -64,8 +64,8 @@ void setup(){
   if(!MPR121.begin(MPR121_ADDR)) Serial.println("error setting up MPR121");
   MPR121.setInterruptPin(MPR121_INT);
 
-  MPR121.setTouchThreshold(25); // for aligator clips: 15, 10
-  MPR121.setReleaseThreshold(20);
+  MPR121.setTouchThreshold(15); // for aligator clips: 15, 10
+  MPR121.setReleaseThreshold(10);
 
 
    for(int i=firstPin; i<=lastPin; i++){
@@ -94,11 +94,13 @@ void readTouchInputs(){
         
             //pin i was just touched
             Serial.print("TCH ");
-            Serial.println(i);  
-        }else if(MPR121.isNewRelease(i)){ 
-          Serial.print("RLS ");
-          Serial.println(i);
-        }else {
+            // 4-7, 5-6, 6-5, 7-4
+            if(i >= 4 && i <= 7) {
+              Serial.println(11 - i);
+            } else {
+              Serial.println(i);  
+            }
+        } else {
           continue;
         }
       }

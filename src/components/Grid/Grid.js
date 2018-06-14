@@ -100,7 +100,7 @@ export default class Grid {
 
 
   getSection(sectionNumber) {
-    console.log(sectionNumber)
+    // console.log(sectionNumber)
     const sectionStartX = this.p.floor(sectionNumber / 4) * this.sectionWidth // starts w 1
     const sectionEndX = sectionStartX + this.sectionWidth - 1
     const sectionStartY = this.p.floor(sectionNumber % 4) * this.sectionHeight // start from 1
@@ -108,7 +108,7 @@ export default class Grid {
     if (sectionEndY > this.p.floor(this.p.height / this.size) - 1) {
       sectionEndY = this.p.floor(this.p.height / this.size) - 1
     }
-    console.log(this.board, this.sectionWidth, this.sectionHeight, sectionStartX, sectionStartY, sectionEndX, sectionEndY)
+    // console.log(this.board, this.sectionWidth, this.sectionHeight, sectionStartX, sectionStartY, sectionEndX, sectionEndY)
     for (let i = sectionStartX; i <= sectionEndX; i++) {
       const column = this.board[i]
       for (let j = sectionStartY; j <= sectionEndY; j++) {

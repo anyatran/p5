@@ -14,7 +14,7 @@ export default {
   FOUR_DIRECTIONS: ['top', 'left', 'bottom', 'right'],
   FRAME_WIDTH: 300, // 300
   KEYCODES: { 192: 0, 49: 1, 50: 2, 51: 3, 52: 4, 53: 5, 54: 6, 55: 7, 56: 8, 57: 9, 48: 10, 189: 11, },
-  SERIAL_PORT: '/dev/cu.usbmodem144131', // temp
+  SERIAL_PORT: '/dev/cu.usbmodem146131', // temp
   SHAPE_TYPES: [null, Circle, HalfCircle, Triangle],
   TWO_DIRECTIONS: ['left', 'right'],
 }

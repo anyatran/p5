@@ -32,15 +32,15 @@ export default class Stripes {
   }
 
   draw() {
-    const step = this.p.frameCount % 200
-    const angle = this.p.map(step, 0, 200, 0, this.p.TWO_PI)
-    const cosA = this.p.cos(angle)
-    const sinA = this.p.sin(angle)
-    if (this.swirl_) {
-      this.p.applyMatrix(cosA, sinA, -sinA, cosA, this.p.width / 2, this.p.height / 2)
-    } else {
-      this.p.resetMatrix()
-    }
+    // const step = this.p.frameCount % 200
+    // const angle = this.p.map(step, 0, 200, 0, this.p.TWO_PI)
+    // const cosA = this.p.cos(angle)
+    // const sinA = this.p.sin(angle)
+    // if (this.swirl_) {
+    //   this.p.applyMatrix(cosA, sinA, -sinA, cosA, this.p.width / 2, this.p.height / 2)
+    // } else {
+    //   this.p.resetMatrix()
+    // }
     // this.p.applyMatrix(cosA, sinA, -sinA, cosA, 0, 0)
     // this.p.rotate(this.angle)
     this.strokes_.map(stroke => {
@@ -59,21 +59,8 @@ export default class Stripes {
   }
 
   onTouch(electrodeNumber) {
-    console.log('strikes', electrodeNumber)
-    this.triggerSounds[electrodeNumber - 1].play()
+    this.triggerSounds[electrodeNumber].play()
     this.freeze()
-    switch (electrodeNumber) {
-      case 1:
-        // this.angle = this.p.HALF_PI
-        this.swirl_ = !this.swirl_
-        break;
-      case 2:
-        this.freeze()
-        break;
-      default:
-        this.angle = 0
-        break;
-    }
   }
 
   isDiagonal() {

@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         currentState.setSound(gridSound)
       }
-      console.log(currentState)
     }
 
     const init = () => {

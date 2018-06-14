@@ -27,6 +27,9 @@ export default class Stroke {
     this.destY_ = this.rows_ + 3
     this.lastFrame_ = this.p.frameCount
     this.stop_ = false
+
+    this.canvasWidth = this.p.width / CONST.CELL_SIZE
+    this.canvasHeight = this.p.height / CONST.CELL_SIZE
   }
 
   draw() {
@@ -82,18 +85,9 @@ export default class Stroke {
   }
 
   freeze() {
-    // if (!this.collapse_) {
-      this.startX = randomInt(0, 50)
-      this.startY = randomInt(0, 20)
-      this.destX_ = randomInt(0, 50)
-      this.destY_ = randomInt(0, 30)
-    // } else {
-      // this.destX_ = randomInt(-10, 10)
-      // this.destY_ = randomInt(-10, 10)
-    // }
-  }
-
-  trigger() {
-    console.log('trigger')
+    this.startX = randomInt(1, this.canvasWidth)
+    this.startY = randomInt(1, this.canvasHeight)
+    this.destX_ = randomInt(this.startX / 2 , this.startX / 2 + this.startX) // this.canvasWidth + 2)
+    this.destY_ = randomInt(this.startY / 2 , this.startY / 2 + this.startY) // (0, this.canvasHeight + 2)
   }
  }
