@@ -1,9 +1,29 @@
 body {
   background: #000;
-  margin: 100px;
-  /* margin: 500px 100px 90px 100px; */
+  /* margin: 100px; */
+  margin: 410px 0 110px 0;
   padding: 0;
   position: relative;
+}
+
+.title {
+  color: white;
+  display: inline;
+  font-size: 120px;
+  position: absolute;
+  top: -423px;
+  width: 100%;
+  margin: 0;
+  height: 40px;
+  font-family: monospace;
+  left: 22px;
+}
+
+.description {
+  font-size: 15px;
+  margin-left: 600px;
+  transform: translateY(-18px);
+  display: block;
 }
 
 .separator {
@@ -11,4 +31,13 @@ body {
   height: 100%;
   position: absolute;
   z-index: 1;
+}
+
+.separator1 {
+
+}
+
+.separator2 {
+  left: 1164px !important;
+  width: 306px !important;
 }

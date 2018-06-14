@@ -60,6 +60,8 @@ export default class Stripes {
 
   onTouch(electrodeNumber) {
     console.log('strikes', electrodeNumber)
+    this.triggerSounds[electrodeNumber - 1].play()
+    this.freeze()
     switch (electrodeNumber) {
       case 1:
         // this.angle = this.p.HALF_PI
@@ -80,5 +82,9 @@ export default class Stripes {
 
   setSound(sound) {
     this.sound = sound
+  }
+
+  setTriggerSounds(sounds) {
+    this.triggerSounds = sounds
   }
 }

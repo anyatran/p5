@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let shackingSound
   let gridSound
   let diagonalSound
-  let gridSounds = []
+  let diagonalSounds = []
   const scenes = [Grid, Stripes]
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
@@ -27,13 +27,27 @@ document.addEventListener('DOMContentLoaded', () => {
     p.preload = () => {
       backgroundSound = new Sound(p, '../sounds/bg.wav', true)
       shackingSound = new Sound(p, '../sounds/rhythm/sparse-drum2.wav', true)
-      gridSound = new Sound(p, '../sounds/main-loop/filter-sine.wav', true)
+      gridSound = new Sound(p, '../sounds/arhythmic/arp-softened.wav', true)
+      // gridSound = new Sound(p, '../sounds/main-loop/endless.wav', true)
       diagonalSound = new Sound(p, '../sounds/main-loop/visualizerloops.wav', true)
-      gridSounds.push(new Sound(p, '../sounds/pads/simple-bells.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp1.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp2.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp3.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp4.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp5.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp6.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp7.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp8.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp9.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp2.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp5.wav', false))
+      diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp3.wav', false))
     }
 
     p.setup = () => {
+      // console.log(body.offsetWidth, body.offsetHeight)
       p.createCanvas(body.offsetWidth, body.offsetHeight)
+      // p.createCanvas(CONST.CANVAS_WIDTH, CONST.CANVAS_HEIGHT)
       p.frameRate(30)
       // Calculate columns and rows
       const columns = countColumns(p.width, CONST.CELL_SIZE)
@@ -83,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const setSound = () => {
       if (currentState.isDiagonal()) {
         currentState.setSound(diagonalSound)
+        currentState.setTriggerSounds(diagonalSounds)
       } else {
         currentState.setSound(gridSound)
       }

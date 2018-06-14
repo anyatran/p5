@@ -120,4 +120,8 @@ export default class Grid {
   onTouch(key) {
     this.getSection(key)
   }
+
+  setTriggerSounds(sounds) {
+    this.triggerSounds = sounds
+  }
 }
