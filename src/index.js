@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let gridSound
   let diagonalSound
   let diagonalSounds = []
+  let gridSounds = []
   const scenes = [Grid, Stripes]
   const body = document.querySelector('body')
   const separators = document.querySelectorAll('[data-separator]')
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     p.preload = () => {
       backgroundSound = new Sound(p, '../sounds/bg.wav', true)
       shackingSound = new Sound(p, '../sounds/rhythm/sparse-drum2.wav', true)
-      gridSound = new Sound(p, '../sounds/arhythmic/arp-softened.wav', true)
+      // gridSound = new Sound(p, '../sounds/arhythmic/arp-softened.wav', true)
       // gridSound = new Sound(p, '../sounds/main-loop/endless.wav', true)
       diagonalSound = new Sound(p, '../sounds/main-loop/visualizerloops.wav', true)
       diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp1.wav', false))
@@ -42,6 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
       diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp2.wav', false))
       diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp5.wav', false))
       diagonalSounds.push(new Sound(p, '../sounds/arhythmic/arp3.wav', false))
+
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-1.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-2.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-3.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-4.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-5.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-6.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-1.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-2.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-3.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-4.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-5.wav', false))
+      gridSounds.push(new Sound(p, '../sounds/simple-bells/simple-bells-6.wav', false))
     }
 
     p.setup = () => {
@@ -100,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentState.setTriggerSounds(diagonalSounds)
       } else {
         currentState.setSound(gridSound)
+        currentState.setTriggerSounds(gridSounds)
       }
     }
 
@@ -119,7 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(interval)
       setTimeout(() => {
         darkMode = CONST.BOOLEANS[randomInt(CONST.BOOLEANS.length)]
-        currentState.sound.stop(2)
+        if (currentState.sound) {
+          currentState.sound.stop(2)
+        }
         currentState = new state(p, CONST.CELL_SIZE, board, darkMode)
         setSound()
         isShacking = false

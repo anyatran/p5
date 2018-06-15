@@ -28,7 +28,9 @@ export default class Stripes {
       }, 300*i)
 
     }
-    this.sound.play()
+    if (this.sound) {
+      this.sound.play()
+    }
   }
 
   draw() {

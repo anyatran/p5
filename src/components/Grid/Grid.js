@@ -37,7 +37,9 @@ export default class Grid {
     const canvasHeight = this.p.height
     this.sectionWidth = this.p.round(canvasWidth / this.size)
     this.sectionHeight = this.p.round(canvasHeight / 4 / this.size)
-    this.sound.play()
+    if (this.sound) {
+      this.sound.play()
+    }
   }
 
   draw() {
@@ -83,20 +85,27 @@ export default class Grid {
         }, randomInt(500, 1500)) // random
       })
     })
-    this.sound.stop(1)
+    if (this.sound) {
+      this.sound.stop(1)
+    }
+
   }
 
   setSound(sound) {
     this.sound = sound
   }
 
+  setTriggerSounds(sounds) {
+    this.triggerSounds = sounds
+  }
+
   isDiagonal() {
     return false
   }
 
-  triggerSection(sectionNumber) {
-    console.log(sectionNumber)
-  }
+  // triggerSection(sectionNumber) {
+  //   console.log(sectionNumber)
+  // }
 
 
   getSection(sectionNumber) {
@@ -117,8 +126,9 @@ export default class Grid {
     }
   }
 
-  onTouch(key) {
-    this.getSection(key)
+  onTouch(electrodeNumber) {
+    this.triggerSounds[electrodeNumber].play()
+    this.getSection(electrodeNumber)
   }
 
   setTriggerSounds(sounds) {

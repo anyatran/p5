@@ -64,8 +64,8 @@ void setup(){
   if(!MPR121.begin(MPR121_ADDR)) Serial.println("error setting up MPR121");
   MPR121.setInterruptPin(MPR121_INT);
 
-  MPR121.setTouchThreshold(15); // for aligator clips: 15, 10
-  MPR121.setReleaseThreshold(10);
+  MPR121.setTouchThreshold(10); // for aligator clips: 15, 10
+  MPR121.setReleaseThreshold(5);
 
 
    for(int i=firstPin; i<=lastPin; i++){
